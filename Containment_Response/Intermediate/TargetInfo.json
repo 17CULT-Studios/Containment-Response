@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "Containment_Response",
+			"Path": "..\\Source\\Containment_Response.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "Containment_ResponseEditor",
+			"Path": "..\\Source\\Containment_ResponseEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
