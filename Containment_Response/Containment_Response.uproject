@@ -12,6 +12,11 @@
 				"Engine",
 				"AIModule"
 			]
+		},
+		{
+			"Name": "NavigationSystem",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [

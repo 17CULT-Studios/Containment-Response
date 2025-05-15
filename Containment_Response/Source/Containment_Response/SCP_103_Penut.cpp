@@ -10,29 +10,46 @@
 #include "SCP_103_AIController.h"
 #include "EngineUtils.h"
 
+#include "NavigationSystem.h"
+//#include "AI/Navigation/NavigationSystem.h"
+#include "NavMesh/NavMeshBoundsVolume.h"
+#include "NavigationPath.h"
+
 ASCP_103_Penut::ASCP_103_Penut()
 {
     PrimaryActorTick.bCanEverTick = true;
+
     CollisionCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionCapsule"));
     CollisionCapsule->InitCapsuleSize(42.f, 96.f);
     CollisionCapsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    CollisionCapsule->SetCollisionResponseToChannel(ECC_Camera, ECR_Block);
     CollisionCapsule->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
     CollisionCapsule->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
     RootComponent = CollisionCapsule;
     SCPMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SCPMesh"));
     SCPMesh->SetupAttachment(RootComponent);
-    SCPMesh->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
-    SCPMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
-    SCPMesh->SetRelativeLocation(FVector(0.f, 0.f, -96.f));
+    SCPMesh->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+    SCPMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
+    SCPMesh->SetCollisionResponseToChannel(ECC_Camera, ECR_Block);
+    SCPMesh->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
     SCPMesh->SetSimulatePhysics(false);
     SCPMesh->SetEnableGravity(false);
     MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
-    MovementComponent->UpdatedComponent = SCPMesh;
+    MovementComponent->UpdatedComponent = CollisionCapsule;
+    HeadComponent = CreateDefaultSubobject<USceneComponent>(TEXT("HeadComponent"));
+    HeadComponent->SetupAttachment(CollisionCapsule);
+    HeadComponent->SetRelativeLocation(FVector(0.f, 0.f, 80.f));
     bIsActive = false;
+    bIsChasingPlayer = false;
     TimeSinceLastSeen = 0.f;
     DeactivationDelay = 60.f;
 
     AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
+
+    UE_LOG(LogTemp, Warning, TEXT("Capsule collision enabled: %d"), (int)CollisionCapsule->GetCollisionEnabled());
+    UE_LOG(LogTemp, Warning, TEXT("Capsule object type: %d"), (int)CollisionCapsule->GetCollisionObjectType());
+    UE_LOG(LogTemp, Warning, TEXT("Capsule visibility response: %d"),
+        (int)CollisionCapsule->GetCollisionResponseToChannel(ECC_Camera));
 }
 
 void ASCP_103_Penut::BeginPlay()
@@ -42,7 +59,10 @@ void ASCP_103_Penut::BeginPlay()
     FindClosestPlayer();
     if (!AIController)
     {
-        UE_LOG(LogTemp, Error, TEXT("SCP AIController is NULL! SCP will not move."));
+        if (debug)
+        {
+            UE_LOG(LogTemp, Error, TEXT("SCP AIController is NULL! SCP will not move."));
+        }
     }
 }
 
@@ -56,50 +76,71 @@ void ASCP_103_Penut::Tick(float DeltaTime)
 
     if (bIsActive)
     {
-        if (IsObservedByPlayer())
+        bool bSeen = IsObservedByPlayer();
+        if (debug)
         {
-            TimeSinceLastSeen = 0.f;
+            UE_LOG(LogTemp, Warning, TEXT("Observed: %s"), bSeen ? TEXT("YES") : TEXT("NO"));
+        }
+        if (bSeen)
+        {
+            if (debug)
+            {
+                UE_LOG(LogTemp, Warning, TEXT("SCP IS BEING WATCHED"));
+            }
+            TimeSinceLastSeen = 0.0f;
             AIController->StopMoving();
         }
         else
         {
-            TimeSinceLastSeen += DeltaTime;
-            if (!IsObservedByPlayer())
+            if (debug)
             {
-                AIController->ChasePlayer(TargetPlayer);
+                UE_LOG(LogTemp, Warning, TEXT("SCP IS NOT BEING WATCHED"));
             }
+            TimeSinceLastSeen += DeltaTime;
+            AIController->ChasePlayer(TargetPlayer);
 
             if (TimeSinceLastSeen >= DeactivationDelay)
             {
                 DeactivateSCP();
             }
         }
+        if (debug)
+        {
+            DrawDebugSphere(GetWorld(), SCPMesh->GetComponentLocation(), 30.f, 12, bSeen ? FColor::Green : FColor::Red, false, 1.f);
+        }
     }
     else
     {
         float Distance = FVector::Dist(GetActorLocation(), TargetPlayer->GetActorLocation());
-        if (Distance < 1500.f)
+        if (Distance < 1500.f && IsObservedByPlayer())
         {
             ActivateSCP();
         }
     }
 
-
+    
 }
 
 void ASCP_103_Penut::ActivateSCP()
 {
     bIsActive = true;
     TimeSinceLastSeen = 0.f;
-    UE_LOG(LogTemp, Warning, TEXT("Activated"));
+    if (debug)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Activated"));
+    }
 }
 
 void ASCP_103_Penut::DeactivateSCP()
 {
     bIsActive = false;
+    bIsChasingPlayer = false;
     TimeSinceLastSeen = 0.f;
     TeleportToRandomLocation();
-    UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
+    if (debug)
+    {
+        UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
+    }
 }
 
 void ASCP_103_Penut::FindClosestPlayer()
@@ -138,56 +179,95 @@ bool ASCP_103_Penut::IsObservedByPlayer()
 
     PlayerController->GetPlayerViewPoint(PlayerViewLoc, PlayerViewRot);
 
-    // Use the SCP's mesh location (more accurate than actor location)
-    FVector SCPViewTarget = SCPMesh->GetComponentLocation();  // Or use a socket like GetSocketLocation("Head")
+    // More accurate SCP view location (or use GetSocketLocation("Head") later)
+    FVector SCPViewTarget = CollisionCapsule->GetComponentLocation();
 
-    FVector DirectionToSCP = SCPViewTarget - PlayerViewLoc;
-    DirectionToSCP.Normalize();
+    // Direction to SCP from player
+    FVector DirectionToSCP = (SCPViewTarget - PlayerViewLoc).GetSafeNormal();
+    FVector PlayerForward = PlayerViewRot.Vector();
 
-    FVector PlayerForwardVector = PlayerViewRot.Vector();
-    float AngleBetween = FMath::Acos(FVector::DotProduct(PlayerForwardVector, DirectionToSCP)) * (180.0f / PI);
-    float PlayerFOV = 60.0f;
-
-    // Visual debug: FOV cone check
-    if (AngleBetween <= PlayerFOV)
+    float Angle = FMath::RadiansToDegrees(acosf(FVector::DotProduct(PlayerForward, DirectionToSCP)));
+    if (debug)
     {
-        DrawDebugLine(GetWorld(), PlayerViewLoc, SCPViewTarget, FColor::Green, false, 1.f, 0, 1.f);  // In FOV
-    }
-    else
-    {
-        DrawDebugLine(GetWorld(), PlayerViewLoc, SCPViewTarget, FColor::Red, false, 1.f, 0, 1.f);  // Outside FOV
-        return false;
+        UE_LOG(LogTemp, Warning, TEXT("Angle to SCP: %f"), Angle);
     }
 
-    // Line trace to check visibility (wall blocking, etc.)
-    FHitResult HitResult;
-    FCollisionQueryParams TraceParams;
-    TraceParams.AddIgnoredActor(TargetPlayer);
-    TraceParams.bTraceComplex = true;
-
-    bool bHit = GetWorld()->LineTraceSingleByChannel(
-        HitResult,
-        PlayerViewLoc,
-        SCPViewTarget,
-        ECC_Visibility,
-        TraceParams
-    );
-
-    // Final check: must be in FOV and visible (not behind wall)
-    if (bHit && HitResult.GetActor() == this)
+    // Debug angle and direction
+    if (debug)
     {
-        DrawDebugLine(GetWorld(), PlayerViewLoc, SCPViewTarget, FColor::Blue, false, 1.f, 0, 2.f);  // Visible and in FOV
-        return true;
+        DrawDebugLine(GetWorld(), PlayerViewLoc, SCPViewTarget, FColor::White, false, 0.1f, 0, 1.f);
     }
 
-    // Hit something else — not visible
-    DrawDebugLine(GetWorld(), PlayerViewLoc, SCPViewTarget, FColor::Yellow, false, 1.f, 0, 1.f);
+    if (Angle > playerFOV) return false;
+
+    // Visibility line trace
+    FHitResult Hit;
+    FCollisionQueryParams Params;
+    Params.AddIgnoredActor(TargetPlayer);
+    Params.bTraceComplex = true;
+
+    bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, PlayerViewLoc, SCPViewTarget, ECC_Pawn, Params);
+    if (debug)
+    {
+        DrawDebugSphere(GetWorld(), SCPViewTarget, 30.f, 12, FColor::Blue, false, 0.1f);
+    }
+    if (bHit)
+    {
+        if (debug)
+        {
+            UE_LOG(LogTemp, Error, TEXT("TRACE HIT -> Actor: %s | Component: %s | Bone: %s"),
+                *GetNameSafe(Hit.GetActor()),
+                *GetNameSafe(Hit.GetComponent()),
+                *Hit.BoneName.ToString());
+        }
+
+        // Just compare Actor
+        if (Hit.GetActor() == this)
+        {
+            if (debug)
+            {
+                DrawDebugSphere(GetWorld(), SCPViewTarget, 30.f, 12, FColor::Green, false, 0.2f);
+            }
+            return true;
+        }
+        else
+        {
+            if (debug)
+            {
+                DrawDebugSphere(GetWorld(), SCPViewTarget, 30.f, 12, FColor::Yellow, false, 0.2f);
+            }
+        }
+    }
+
+    // No hit? Assume not visible
     return false;
-
 }
 
 void ASCP_103_Penut::TeleportToRandomLocation()
 {
-    FVector NewLoc = GetActorLocation() + FMath::VRand() * 2000.f;
-    SetActorLocation(NewLoc);
+    float TeleportRadius = 2000.0f;
+
+    UNavigationSystemV1* NavSystem = UNavigationSystemV1::GetCurrent(GetWorld());
+    if (NavSystem)
+    {
+        FVector Origin = GetActorLocation();
+
+        FNavLocation RandomNavPoint;
+
+        if (NavSystem->GetRandomPointInNavigableRadius(Origin, TeleportRadius, RandomNavPoint))
+        {
+            SetActorLocation(RandomNavPoint);
+            if (debug)
+            {
+                UE_LOG(LogTemp, Warning, TEXT("Teleporting to valid point at: %s"), *RandomNavPoint.Location.ToString());
+            }
+        }
+        else
+        {
+            if (debug)
+            {
+                UE_LOG(LogTemp, Warning, TEXT("No valid point found on NavMesh for teleportation."));
+            }
+        }
+    }
 }

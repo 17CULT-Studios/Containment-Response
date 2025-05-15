@@ -28,25 +28,33 @@ void ASCP_103_AIController::ChasePlayer(AActor* Player)
         return;
     }
 
+    // Don't reissue move if we're already chasing this actor
+    if (Player == CurrentMoveTarget && GetPathFollowingComponent()->GetStatus() == EPathFollowingStatus::Moving)
+    {
+        return;
+    }
+
     EPathFollowingRequestResult::Type MoveResult = MoveToActor(Player, 5.f);
 
-    if (MoveResult == EPathFollowingRequestResult::Failed)
+    if (MoveResult == EPathFollowingRequestResult::RequestSuccessful)
     {
-        UE_LOG(LogTemp, Error, TEXT("MoveToActor failed."));
+        CurrentMoveTarget = Player;
+        UE_LOG(LogTemp, Warning, TEXT("MoveToActor request succeeded."));
     }
     else if (MoveResult == EPathFollowingRequestResult::AlreadyAtGoal)
     {
         UE_LOG(LogTemp, Warning, TEXT("Already at goal."));
     }
-    else if (MoveResult == EPathFollowingRequestResult::RequestSuccessful)
+    else
     {
-        UE_LOG(LogTemp, Warning, TEXT("MoveToActor request succeeded."));
+        UE_LOG(LogTemp, Error, TEXT("MoveToActor failed."));
     }
 }
 
 void ASCP_103_AIController::StopMoving()
 {
     StopMovement();
+    CurrentMoveTarget = nullptr;
     UE_LOG(LogTemp, Warning, TEXT("Stopped Moving"));
 }
 

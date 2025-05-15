@@ -14,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 	ENGINE_API UClass* Z_Construct_UClass_APawn();
 	ENGINE_API UClass* Z_Construct_UClass_UCapsuleComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UFloatingPawnMovement_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
 // End Cross Module References
@@ -43,6 +44,10 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_MovementComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MovementComponent;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeadComponent_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_HeadComponent;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -83,10 +88,18 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_MovementComponent = { "MovementComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_103_Penut, MovementComponent), Z_Construct_UClass_UFloatingPawnMovement_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_MovementComponent_MetaData), Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_MovementComponent_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent_MetaData[] = {
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "SCP_103_Penut.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent = { "HeadComponent", nullptr, (EPropertyFlags)0x0020080000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_103_Penut, HeadComponent), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent_MetaData), Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASCP_103_Penut_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_SCPMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_CollisionCapsule,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_MovementComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ASCP_103_Penut_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ASCP_103_Penut>::IsAbstract,
@@ -126,9 +139,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ASCP_103_Penut, ASCP_103_Penut::StaticClass, TEXT("ASCP_103_Penut"), &Z_Registration_Info_UClass_ASCP_103_Penut, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_103_Penut), 2595369515U) },
+		{ Z_Construct_UClass_ASCP_103_Penut, ASCP_103_Penut::StaticClass, TEXT("ASCP_103_Penut"), &Z_Registration_Info_UClass_ASCP_103_Penut, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_103_Penut), 2378407134U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_739725598(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_3084165308(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

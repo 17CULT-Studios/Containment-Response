@@ -31,12 +31,19 @@ protected:
     class UCapsuleComponent* CollisionCapsule;
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     class UFloatingPawnMovement* MovementComponent;
+    UPROPERTY()
+    USceneComponent* HeadComponent;
 
 private:
+    
     ACharacter* TargetPlayer;
     class ASCP_103_AIController* AIController;
 
+    
     bool bIsActive;
+    bool debug = 0;
+    float playerFOV = 45.0f;
+    bool bIsChasingPlayer;
     float TimeSinceLastSeen;
     float DeactivationDelay;
 
