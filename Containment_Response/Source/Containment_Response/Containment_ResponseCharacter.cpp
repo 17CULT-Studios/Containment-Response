@@ -36,8 +36,27 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	Mesh1P->SetupAttachment(FirstPersonCameraComponent);
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
-	//Mesh1P->SetRelativeRotation(FRotator(0.9f, -19.19f, 5.2f));
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
+
+	static ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshAsset(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny.SKM_Manny"));
+	static ConstructorHelpers::FClassFinder<UAnimInstance> Anim(TEXT("/Game/Characters/Mannequins/Animations/ABP_Manny"));
+	if (MeshAsset.Succeeded())
+	{
+		Mesh3P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshAsset"));
+		Mesh3P->SetSkeletalMesh(MeshAsset.Object);
+		Mesh3P->SetAnimInstanceClass(Anim.Class);
+		Mesh3P->SetOnlyOwnerSee(false);
+		Mesh3P->SetOwnerNoSee(true);
+		Mesh3P->SetupAttachment(RootComponent);
+		Mesh3P->bCastDynamicShadow = true;
+		Mesh3P->CastShadow = true;
+		Mesh3P->SetRelativeLocation(FVector(0.f, 0.f, -98.f));
+		Mesh3P->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
+		if (Anim.Succeeded())
+		{
+			Mesh3P->SetAnimInstanceClass(Anim.Class);
+		}
+	}
 
 }
 
