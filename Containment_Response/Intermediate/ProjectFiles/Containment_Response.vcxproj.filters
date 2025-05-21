@@ -66,6 +66,18 @@
     <ClInclude Include="..\..\Source\Containment_Response\Containment_ResponseProjectile.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\CRT_Unit.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\CRT_Unit_AIController.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit_AIController.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\SCP_103_AIController.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>

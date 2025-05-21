@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Containment_ResponseModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6204bb29a17e6a0ee8990a15d5782d34486542d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+49d12262b5a8dae4306614eb0a890ad0084247a9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Containment_ResponseModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Containment_ResponseModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
