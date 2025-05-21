@@ -14,9 +14,12 @@
 //#include "AI/Navigation/NavigationSystem.h"
 #include "NavMesh/NavMeshBoundsVolume.h"
 #include "NavigationPath.h"
+#include "Net/UnrealNetwork.h"
 
 ASCP_103_Penut::ASCP_103_Penut()
 {
+    bReplicates = true;
+
     PrimaryActorTick.bCanEverTick = true;
 
     CollisionCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionCapsule"));
@@ -52,6 +55,13 @@ ASCP_103_Penut::ASCP_103_Penut()
         (int)CollisionCapsule->GetCollisionResponseToChannel(ECC_Camera));
 }
 
+void ASCP_103_Penut::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(ASCP_103_Penut, ReplicatedRotation)
+}
+
 void ASCP_103_Penut::BeginPlay()
 {
     Super::BeginPlay();
@@ -64,6 +74,11 @@ void ASCP_103_Penut::BeginPlay()
             UE_LOG(LogTemp, Error, TEXT("SCP AIController is NULL! SCP will not move."));
         }
     }
+}
+
+void ASCP_103_Penut::OnRep_ReplicatedRotation()
+{
+    SCPMesh->SetWorldRotation(ReplicatedRotation);
 }
 
 void ASCP_103_Penut::Tick(float DeltaTime)
@@ -118,7 +133,21 @@ void ASCP_103_Penut::Tick(float DeltaTime)
         }
     }
 
-    
+    if (HasAuthority())
+    {
+        FVector CurrentLocation = GetActorLocation();
+        FVector MovementDelta = CurrentLocation - LastLocation;
+
+        if (!MovementDelta.IsNearlyZero())
+        {
+            FRotator Direction = MovementDelta.Rotation();
+            FRotator MeshOffset(0.0f, 90.0f, 0.0f);
+            Direction += MeshOffset;
+            ReplicatedRotation = Direction;
+            SCPMesh->SetWorldRotation(Direction);
+        }
+        LastLocation = CurrentLocation;
+    }
 }
 
 void ASCP_103_Penut::ActivateSCP()
@@ -271,3 +300,4 @@ void ASCP_103_Penut::TeleportToRandomLocation()
         }
     }
 }
+

@@ -11,6 +11,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 // Cross Module References
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_103_Penut();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_103_Penut_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
 	ENGINE_API UClass* Z_Construct_UClass_APawn();
 	ENGINE_API UClass* Z_Construct_UClass_UCapsuleComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UFloatingPawnMovement_NoRegister();
@@ -18,8 +19,42 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
 // End Cross Module References
+	DEFINE_FUNCTION(ASCP_103_Penut::execOnRep_ReplicatedRotation)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnRep_ReplicatedRotation();
+		P_NATIVE_END;
+	}
 	void ASCP_103_Penut::StaticRegisterNativesASCP_103_Penut()
 	{
+		UClass* Class = ASCP_103_Penut::StaticClass();
+		static const FNameNativePtrPair Funcs[] = {
+			{ "OnRep_ReplicatedRotation", &ASCP_103_Penut::execOnRep_ReplicatedRotation },
+		};
+		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "SCP_103_Penut.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASCP_103_Penut, nullptr, "OnRep_ReplicatedRotation", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	IMPLEMENT_CLASS_NO_AUTO_REGISTRATION(ASCP_103_Penut);
 	UClass* Z_Construct_UClass_ASCP_103_Penut_NoRegister()
@@ -29,6 +64,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 	struct Z_Construct_UClass_ASCP_103_Penut_Statics
 	{
 		static UObject* (*const DependentSingletons[])();
+		static const FClassFunctionLinkInfo FuncInfo[];
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
@@ -48,6 +84,10 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeadComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_HeadComponent;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReplicatedRotation_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_ReplicatedRotation;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -57,6 +97,10 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 		(UObject* (*)())Z_Construct_UPackage__Script_Containment_Response,
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::DependentSingletons) < 16);
+	const FClassFunctionLinkInfo Z_Construct_UClass_ASCP_103_Penut_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_ASCP_103_Penut_OnRep_ReplicatedRotation, "OnRep_ReplicatedRotation" }, // 4233772212
+	};
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_103_Penut_Statics::Class_MetaDataParams[] = {
 		{ "HideCategories", "Navigation" },
@@ -95,11 +139,18 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent = { "HeadComponent", nullptr, (EPropertyFlags)0x0020080000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_103_Penut, HeadComponent), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent_MetaData), Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_ReplicatedRotation_MetaData[] = {
+		{ "ModuleRelativePath", "SCP_103_Penut.h" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_ReplicatedRotation = { "ReplicatedRotation", "OnRep_ReplicatedRotation", (EPropertyFlags)0x0020080100000020, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_103_Penut, ReplicatedRotation), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_ReplicatedRotation_MetaData), Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_ReplicatedRotation_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASCP_103_Penut_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_SCPMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_CollisionCapsule,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_MovementComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_HeadComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_103_Penut_Statics::NewProp_ReplicatedRotation,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ASCP_103_Penut_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ASCP_103_Penut>::IsAbstract,
@@ -109,11 +160,11 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 		"Game",
 		&StaticCppClassTypeInfo,
 		DependentSingletons,
-		nullptr,
+		FuncInfo,
 		Z_Construct_UClass_ASCP_103_Penut_Statics::PropPointers,
 		nullptr,
 		UE_ARRAY_COUNT(DependentSingletons),
-		0,
+		UE_ARRAY_COUNT(FuncInfo),
 		UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_103_Penut_Statics::PropPointers),
 		0,
 		0x009000A4u,
@@ -132,6 +183,16 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 	{
 		return ASCP_103_Penut::StaticClass();
 	}
+
+	void ASCP_103_Penut::ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const
+	{
+		static const FName Name_ReplicatedRotation(TEXT("ReplicatedRotation"));
+
+		const bool bIsValid = true
+			&& Name_ReplicatedRotation == ClassReps[(int32)ENetFields_Private::ReplicatedRotation].Property->GetFName();
+
+		checkf(bIsValid, TEXT("UHT Generated Rep Indices do not match runtime populated Rep Indices for properties in ASCP_103_Penut"));
+	}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ASCP_103_Penut);
 	ASCP_103_Penut::~ASCP_103_Penut() {}
 	struct Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics
@@ -139,9 +200,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_103_Penut() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ASCP_103_Penut, ASCP_103_Penut::StaticClass, TEXT("ASCP_103_Penut"), &Z_Registration_Info_UClass_ASCP_103_Penut, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_103_Penut), 2378407134U) },
+		{ Z_Construct_UClass_ASCP_103_Penut, ASCP_103_Penut::StaticClass, TEXT("ASCP_103_Penut"), &Z_Registration_Info_UClass_ASCP_103_Penut, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_103_Penut), 203484606U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_3084165308(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_4078351486(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

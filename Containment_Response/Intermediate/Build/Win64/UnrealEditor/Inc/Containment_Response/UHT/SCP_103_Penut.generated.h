@@ -17,7 +17,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_SPARSE_DATA
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
-#define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_RPC_WRAPPERS_NO_PURE_DECLS
+#define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execOnRep_ReplicatedRotation);
+
+
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_ACCESSORS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_INCLASS_NO_PURE_DECLS \
 private: \
@@ -25,7 +29,13 @@ private: \
 	friend struct Z_Construct_UClass_ASCP_103_Penut_Statics; \
 public: \
 	DECLARE_CLASS(ASCP_103_Penut, APawn, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Containment_Response"), NO_API) \
-	DECLARE_SERIALIZER(ASCP_103_Penut)
+	DECLARE_SERIALIZER(ASCP_103_Penut) \
+	enum class ENetFields_Private : uint16 \
+	{ \
+		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
+		ReplicatedRotation=NETFIELD_REP_START, \
+		NETFIELD_REP_END=ReplicatedRotation	}; \
+	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_103_Penut_h_13_ENHANCED_CONSTRUCTORS \

@@ -22,6 +22,8 @@ public:
 
     bool IsActive() const { return bIsActive; }
 
+    virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
     virtual void BeginPlay() override;
 
@@ -33,6 +35,10 @@ protected:
     class UFloatingPawnMovement* MovementComponent;
     UPROPERTY()
     USceneComponent* HeadComponent;
+    UPROPERTY(ReplicatedUsing = OnRep_ReplicatedRotation)
+    FRotator ReplicatedRotation;
+    UFUNCTION()
+    void OnRep_ReplicatedRotation();
 
 private:
     
@@ -46,6 +52,7 @@ private:
     bool bIsChasingPlayer;
     float TimeSinceLastSeen;
     float DeactivationDelay;
+    FVector LastLocation;
 
     void FindClosestPlayer();
     bool IsObservedByPlayer();
