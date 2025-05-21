@@ -55,6 +55,6 @@ private:
     FVector LastLocation;
 
     void FindClosestPlayer();
-    bool IsObservedByPlayer();
+    bool IsObserved();
     void TeleportToRandomLocation();
 };

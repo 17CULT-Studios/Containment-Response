@@ -15,6 +15,8 @@
 #include "NavMesh/NavMeshBoundsVolume.h"
 #include "NavigationPath.h"
 #include "Net/UnrealNetwork.h"
+#include "DrawDebugHelpers.h"
+#include "EngineUtils.h"
 
 ASCP_103_Penut::ASCP_103_Penut()
 {
@@ -91,7 +93,7 @@ void ASCP_103_Penut::Tick(float DeltaTime)
 
     if (bIsActive)
     {
-        bool bSeen = IsObservedByPlayer();
+        bool bSeen = IsObserved();
         if (debug)
         {
             UE_LOG(LogTemp, Warning, TEXT("Observed: %s"), bSeen ? TEXT("YES") : TEXT("NO"));
@@ -127,7 +129,7 @@ void ASCP_103_Penut::Tick(float DeltaTime)
     else
     {
         float Distance = FVector::Dist(GetActorLocation(), TargetPlayer->GetActorLocation());
-        if (Distance < 1500.f && IsObservedByPlayer())
+        if (Distance < 1500.f && IsObserved())
         {
             ActivateSCP();
         }
@@ -196,80 +198,43 @@ void ASCP_103_Penut::FindClosestPlayer()
     TargetPlayer = Closest;
 }
 
-bool ASCP_103_Penut::IsObservedByPlayer()
+bool ASCP_103_Penut::IsObserved()
 {
-    if (!TargetPlayer) return false;
+    UWorld* World = GetWorld();
+    if (!World) return false;
 
-    FVector PlayerViewLoc;
-    FRotator PlayerViewRot;
-
-    AController* PlayerController = TargetPlayer->GetController();
-    if (!PlayerController) return false;
-
-    PlayerController->GetPlayerViewPoint(PlayerViewLoc, PlayerViewRot);
-
-    // More accurate SCP view location (or use GetSocketLocation("Head") later)
     FVector SCPViewTarget = CollisionCapsule->GetComponentLocation();
 
-    // Direction to SCP from player
-    FVector DirectionToSCP = (SCPViewTarget - PlayerViewLoc).GetSafeNormal();
-    FVector PlayerForward = PlayerViewRot.Vector();
-
-    float Angle = FMath::RadiansToDegrees(acosf(FVector::DotProduct(PlayerForward, DirectionToSCP)));
-    if (debug)
+    for (TActorIterator<APawn> It(World); It; ++It)
     {
-        UE_LOG(LogTemp, Warning, TEXT("Angle to SCP: %f"), Angle);
-    }
+        APawn* ObserverPawn = *It;
+        if (!ObserverPawn || ObserverPawn == this) continue;
 
-    // Debug angle and direction
-    if (debug)
-    {
-        DrawDebugLine(GetWorld(), PlayerViewLoc, SCPViewTarget, FColor::White, false, 0.1f, 0, 1.f);
-    }
+        AController* ObserverController = ObserverPawn->GetController();
+        if (!ObserverController) continue;
 
-    if (Angle > playerFOV) return false;
+        FVector ViewLoc;
+        FRotator ViewRot;
 
-    // Visibility line trace
-    FHitResult Hit;
-    FCollisionQueryParams Params;
-    Params.AddIgnoredActor(TargetPlayer);
-    Params.bTraceComplex = true;
+        ObserverController->GetPlayerViewPoint(ViewLoc, ViewRot);
 
-    bool bHit = GetWorld()->LineTraceSingleByChannel(Hit, PlayerViewLoc, SCPViewTarget, ECC_Pawn, Params);
-    if (debug)
-    {
-        DrawDebugSphere(GetWorld(), SCPViewTarget, 30.f, 12, FColor::Blue, false, 0.1f);
-    }
-    if (bHit)
-    {
+        FVector DirectionToSCP = (SCPViewTarget - ViewLoc).GetSafeNormal();
+        FVector ObserverForward = ViewRot.Vector();
+
+        float Angle = FMath::RadiansToDegrees(acosf(FVector::DotProduct(ObserverForward, DirectionToSCP)));
+
         if (debug)
         {
-            UE_LOG(LogTemp, Error, TEXT("TRACE HIT -> Actor: %s | Component: %s | Bone: %s"),
-                *GetNameSafe(Hit.GetActor()),
-                *GetNameSafe(Hit.GetComponent()),
-                *Hit.BoneName.ToString());
+            UE_LOG(LogTemp, Warning, TEXT("[%s] Angle to SCP: %f"), *ObserverPawn->GetName(), Angle);
+            DrawDebugLine(World, ViewLoc, SCPViewTarget, FColor::White, false, 0.1f, 0, 1.f);
         }
 
-        // Just compare Actor
-        if (Hit.GetActor() == this)
-        {
-            if (debug)
-            {
-                DrawDebugSphere(GetWorld(), SCPViewTarget, 30.f, 12, FColor::Green, false, 0.2f);
-            }
-            return true;
-        }
-        else
-        {
-            if (debug)
-            {
-                DrawDebugSphere(GetWorld(), SCPViewTarget, 30.f, 12, FColor::Yellow, false, 0.2f);
-            }
-        }
+        if (Angle > playerFOV) continue;
+
+        FHitResult Hit;
+        FCollisionQueryParams Params;
+        //TODO
     }
-
-    // No hit? Assume not visible
-    return false;
 }
 
 void ASCP_103_Penut::TeleportToRandomLocation()
