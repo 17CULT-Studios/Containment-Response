@@ -8,6 +8,7 @@ public class Containment_Response : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","NavigationSystem" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput","NavigationSystem","OnlineSubsystem","OnlineSubsystemUtils" });
+		PrivateDependencyModuleNames.Add("OnlineSubsystemSteam");
 	}
 }

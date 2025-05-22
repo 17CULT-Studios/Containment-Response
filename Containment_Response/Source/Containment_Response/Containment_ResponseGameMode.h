@@ -13,6 +13,7 @@ class AContainment_ResponseGameMode : public AGameModeBase
 
 public:
 	AContainment_ResponseGameMode();
+	virtual void PostLogin(APlayerController* NewPlayer) override;
 };
 
 

@@ -233,8 +233,24 @@ bool ASCP_103_Penut::IsObserved()
 
         FHitResult Hit;
         FCollisionQueryParams Params;
-        //TODO
+        Params.AddIgnoredActor(ObserverPawn);
+        Params.AddIgnoredActor(this);
+
+        bool bHit = World->LineTraceSingleByChannel(Hit, ViewLoc, SCPViewTarget, ECC_Visibility, Params);
+
+        if (debug && bHit)
+        {
+            DrawDebugLine(World, ViewLoc, Hit.Location, FColor::Red, false, 0.1f, 0, 1.f);
+            UE_LOG(LogTemp, Warning, TEXT("Hit: %s"), *Hit.GetActor()->GetName());
+        }
+
+        if (!bHit || Hit.GetActor() == this)
+        {
+            // Observer sees SCP
+            return true;
+        }
     }
+    return false;
 }
 
 void ASCP_103_Penut::TeleportToRandomLocation()

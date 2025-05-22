@@ -47,8 +47,22 @@ class AContainment_ResponseCharacter : public ACharacter
 public:
 	AContainment_ResponseCharacter();
 
+	void SetPlayerName(const FString& NewName);
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 protected:
 	virtual void BeginPlay();
+	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NameTag")
+	class UTextRenderComponent* NameTagText;
+
+	UPROPERTY(ReplicatedUsing = OnRep_PlayerName)
+	FString PlayerName;
+
+	UFUNCTION()
+	void OnRep_PlayerName();
 
 public:
 		

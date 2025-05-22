@@ -10,6 +10,10 @@
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
 #include "Engine/LocalPlayer.h"
+#include "Components/TextRenderComponent.h"
+#include "Net/UnrealNetwork.h"
+#include "OnlineSubsystem.h"
+#include "Interfaces/OnlineIdentityInterface.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -20,6 +24,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 {
 	// Character doesnt have a rifle at start
 	bHasRifle = false;
+	bReplicates = true;
 	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
@@ -37,6 +42,15 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
+
+	NameTagText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("NameTagText"));
+	NameTagText->SetupAttachment(RootComponent);
+	NameTagText->SetRelativeLocation(FVector(0.f, 0.f, 100.f));
+	NameTagText->SetHorizontalAlignment(EHTA_Center);
+	NameTagText->SetVerticalAlignment(EVRTA_TextCenter);
+	NameTagText->SetTextRenderColor(FColor::White);
+	NameTagText->SetWorldSize(40.f);
+	NameTagText->SetText(FText::FromString("Player"));
 
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshAsset(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny.SKM_Manny"));
 	static ConstructorHelpers::FClassFinder<UAnimInstance> Anim(TEXT("/Game/Characters/Mannequins/Animations/ABP_Manny"));
@@ -60,6 +74,18 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 
 }
 
+void AContainment_ResponseCharacter::SetPlayerName(const FString& NewName)
+{
+	PlayerName = NewName;
+	OnRep_PlayerName();
+}
+
+void AContainment_ResponseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AContainment_ResponseCharacter, PlayerName);
+}
+
 void AContainment_ResponseCharacter::BeginPlay()
 {
 	// Call the base class  
@@ -74,6 +100,30 @@ void AContainment_ResponseCharacter::BeginPlay()
 		}
 	}
 
+}
+
+void AContainment_ResponseCharacter::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (NameTagText && GetWorld())
+	{
+		APlayerController* PC = GetWorld()->GetFirstPlayerController();
+		if (PC && PC->PlayerCameraManager)
+		{
+			FVector CamLoc = PC->PlayerCameraManager->GetCameraLocation();
+			FRotator LookAtRot = FRotationMatrix::MakeFromX(CamLoc - NameTagText->GetComponentLocation()).Rotator();
+			NameTagText->SetWorldRotation(LookAtRot);
+		}
+	}
+}
+
+void AContainment_ResponseCharacter::OnRep_PlayerName()
+{
+	if (NameTagText)
+	{
+		NameTagText->SetText(FText::FromString(PlayerName));
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////// Input

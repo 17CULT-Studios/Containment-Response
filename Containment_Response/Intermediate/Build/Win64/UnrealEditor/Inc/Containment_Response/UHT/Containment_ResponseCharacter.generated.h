@@ -20,7 +20,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
  \
 	DECLARE_FUNCTION(execGetHasRifle); \
-	DECLARE_FUNCTION(execSetHasRifle);
+	DECLARE_FUNCTION(execSetHasRifle); \
+	DECLARE_FUNCTION(execOnRep_PlayerName);
 
 
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_22_ACCESSORS
@@ -30,7 +31,13 @@ private: \
 	friend struct Z_Construct_UClass_AContainment_ResponseCharacter_Statics; \
 public: \
 	DECLARE_CLASS(AContainment_ResponseCharacter, ACharacter, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Containment_Response"), NO_API) \
-	DECLARE_SERIALIZER(AContainment_ResponseCharacter)
+	DECLARE_SERIALIZER(AContainment_ResponseCharacter) \
+	enum class ENetFields_Private : uint16 \
+	{ \
+		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
+		PlayerName=NETFIELD_REP_START, \
+		NETFIELD_REP_END=PlayerName	}; \
+	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_22_ENHANCED_CONSTRUCTORS \
