@@ -59,13 +59,15 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 		Mesh3P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshAsset"));
 		Mesh3P->SetSkeletalMesh(MeshAsset.Object);
 		Mesh3P->SetAnimInstanceClass(Anim.Class);
-		Mesh3P->SetOnlyOwnerSee(false);
-		Mesh3P->SetOwnerNoSee(true);
 		Mesh3P->SetupAttachment(RootComponent);
-		Mesh3P->bCastDynamicShadow = true;
-		Mesh3P->CastShadow = true;
 		Mesh3P->SetRelativeLocation(FVector(0.f, 0.f, -98.f));
 		Mesh3P->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
+		Mesh3P->bCastDynamicShadow = true;
+		Mesh3P->CastShadow = true;
+		Mesh3P->bOwnerNoSee = true;
+		Mesh3P->bOnlyOwnerSee = false;
+		
+	
 		if (Anim.Succeeded())
 		{
 			Mesh3P->SetAnimInstanceClass(Anim.Class);

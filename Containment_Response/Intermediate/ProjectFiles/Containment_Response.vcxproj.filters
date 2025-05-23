@@ -321,16 +321,16 @@
     <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit_AIController.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_103_AIController.cpp">
+    <ClCompile Include="..\..\Source\Containment_Response\SCP_173_AIController.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_103_AIController.h">
+    <ClInclude Include="..\..\Source\Containment_Response\SCP_173_AIController.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_103_Penut.cpp">
+    <ClCompile Include="..\..\Source\Containment_Response\SCP_173_Penut.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_103_Penut.h">
+    <ClInclude Include="..\..\Source\Containment_Response\SCP_173_Penut.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\TP_PickUpComponent.cpp">
