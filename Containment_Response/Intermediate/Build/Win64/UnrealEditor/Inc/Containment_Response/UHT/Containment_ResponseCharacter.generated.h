@@ -19,6 +19,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_22_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_22_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execGetAtTable); \
+	DECLARE_FUNCTION(execSetAtTable); \
 	DECLARE_FUNCTION(execGetHasRifle); \
 	DECLARE_FUNCTION(execSetHasRifle); \
 	DECLARE_FUNCTION(execOnRep_PlayerName);

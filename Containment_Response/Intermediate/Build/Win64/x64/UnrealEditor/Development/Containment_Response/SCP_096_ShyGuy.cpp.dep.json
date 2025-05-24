@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\source\\containment_response\\scp_096_shyguy.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\intermediate\\build\\win64\\x64\\containment_responseeditor\\development\\unrealed\\sharedpch.unrealed.cpp20.h.pch",
+        "Includes": [
+            "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\containment_response\\definitions.containment_response.h",
+            "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\source\\containment_response\\scp_096_shyguy.h",
+            "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\intermediate\\build\\win64\\unrealeditor\\inc\\containment_response\\uht\\scp_096_shyguy.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

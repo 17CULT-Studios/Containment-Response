@@ -276,6 +276,12 @@
     <Filter Include="Source\Containment_Response">
       <UniqueIdentifier>{13B9125B-55B2-3B67-812E-90A2034891DB}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\Containment_Response\AttachmentBase.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\AttachmentBase.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
     <None Include="..\..\Source\Containment_Response\Containment_Response.Build.cs">
       <Filter>Source\Containment_Response</Filter>
     </None>
@@ -321,6 +327,18 @@
     <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit_AIController.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\SCP_096_AIController.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\SCP_096_AIController.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\SCP_096_ShyGuy.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\SCP_096_ShyGuy.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\SCP_173_AIController.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>
@@ -343,6 +361,12 @@
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Containment_Response\TP_WeaponComponent.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\Weapon.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\Weapon.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
   </ItemGroup>

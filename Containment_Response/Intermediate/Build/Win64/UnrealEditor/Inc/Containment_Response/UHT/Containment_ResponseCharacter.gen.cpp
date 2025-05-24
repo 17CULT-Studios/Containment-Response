@@ -19,6 +19,21 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
 // End Cross Module References
+	DEFINE_FUNCTION(AContainment_ResponseCharacter::execGetAtTable)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(bool*)Z_Param__Result=P_THIS->GetAtTable();
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AContainment_ResponseCharacter::execSetAtTable)
+	{
+		P_GET_UBOOL(Z_Param_bNewAtTable);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->SetAtTable(Z_Param_bNewAtTable);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AContainment_ResponseCharacter::execGetHasRifle)
 	{
 		P_FINISH;
@@ -45,11 +60,53 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	{
 		UClass* Class = AContainment_ResponseCharacter::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
+			{ "GetAtTable", &AContainment_ResponseCharacter::execGetAtTable },
 			{ "GetHasRifle", &AContainment_ResponseCharacter::execGetHasRifle },
 			{ "OnRep_PlayerName", &AContainment_ResponseCharacter::execOnRep_PlayerName },
+			{ "SetAtTable", &AContainment_ResponseCharacter::execSetAtTable },
 			{ "SetHasRifle", &AContainment_ResponseCharacter::execSetHasRifle },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
+	}
+	struct Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics
+	{
+		struct Containment_ResponseCharacter_eventGetAtTable_Parms
+		{
+			bool ReturnValue;
+		};
+		static void NewProp_ReturnValue_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::NewProp_ReturnValue_SetBit(void* Obj)
+	{
+		((Containment_ResponseCharacter_eventGetAtTable_Parms*)Obj)->ReturnValue = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(Containment_ResponseCharacter_eventGetAtTable_Parms), &Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::NewProp_ReturnValue_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AContainment_ResponseCharacter, nullptr, "GetAtTable", nullptr, nullptr, Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::PropPointers), sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::Containment_ResponseCharacter_eventGetAtTable_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::Function_MetaDataParams), Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::Containment_ResponseCharacter_eventGetAtTable_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable_Statics::FuncParams);
+		}
+		return ReturnFunction;
 	}
 	struct Z_Construct_UFunction_AContainment_ResponseCharacter_GetHasRifle_Statics
 	{
@@ -116,6 +173,46 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics
+	{
+		struct Containment_ResponseCharacter_eventSetAtTable_Parms
+		{
+			bool bNewAtTable;
+		};
+		static void NewProp_bNewAtTable_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bNewAtTable;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::NewProp_bNewAtTable_SetBit(void* Obj)
+	{
+		((Containment_ResponseCharacter_eventSetAtTable_Parms*)Obj)->bNewAtTable = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::NewProp_bNewAtTable = { "bNewAtTable", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(Containment_ResponseCharacter_eventSetAtTable_Parms), &Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::NewProp_bNewAtTable_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::NewProp_bNewAtTable,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AContainment_ResponseCharacter, nullptr, "SetAtTable", nullptr, nullptr, Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::PropPointers), sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::Containment_ResponseCharacter_eventSetAtTable_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::Function_MetaDataParams), Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::Containment_ResponseCharacter_eventSetAtTable_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -218,6 +315,11 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #endif
 		static void NewProp_bHasRifle_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bHasRifle;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bAtTable_MetaData[];
+#endif
+		static void NewProp_bAtTable_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bAtTable;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -228,8 +330,10 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AContainment_ResponseCharacter_Statics::FuncInfo[] = {
+		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable, "GetAtTable" }, // 3334811139
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHasRifle, "GetHasRifle" }, // 946526060
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName, "OnRep_PlayerName" }, // 3273537356
+		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable, "SetAtTable" }, // 3909255747
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetHasRifle, "SetHasRifle" }, // 3670791276
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::FuncInfo) < 2048);
@@ -364,6 +468,17 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		((AContainment_ResponseCharacter*)Obj)->bHasRifle = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bHasRifle = { "bHasRifle", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AContainment_ResponseCharacter), &Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bHasRifle_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bHasRifle_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bHasRifle_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_MetaData[] = {
+		{ "Category", "Weapon" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	void Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_SetBit(void* Obj)
+	{
+		((AContainment_ResponseCharacter*)Obj)->bAtTable = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable = { "bAtTable", nullptr, (EPropertyFlags)0x0010000000020015, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(AContainment_ResponseCharacter), &Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AContainment_ResponseCharacter_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_Mesh1P,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_Mesh3P,
@@ -375,6 +490,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_LookAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bHasRifle,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AContainment_ResponseCharacter_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AContainment_ResponseCharacter>::IsAbstract,
@@ -424,9 +540,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 1981105342U) },
+		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 4242211516U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_1506418238(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_2422204681(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

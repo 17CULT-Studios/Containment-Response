@@ -187,3 +187,13 @@ bool AContainment_ResponseCharacter::GetHasRifle()
 {
 	return bHasRifle;
 }
+
+void AContainment_ResponseCharacter::SetAtTable(bool bNewAtTable)
+{
+	bAtTable = bNewAtTable;
+}
+
+bool AContainment_ResponseCharacter::GetAtTable()
+{
+	return bAtTable;
+}
