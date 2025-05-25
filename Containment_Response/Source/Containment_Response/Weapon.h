@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/ArrowComponent.h"
 #include "Weapon.generated.h"
 
 
@@ -51,7 +52,7 @@ public:
 
 	/** Main weapon mesh */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	USkeletalMeshComponent* WeaponMesh;
+	UStaticMeshComponent* WeaponMesh;
 
 	/** Base weapon stats */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
@@ -67,4 +68,7 @@ public:
 	/** Equip an attachment */
 	UFUNCTION(BlueprintCallable, Category = "Attachments")
 	bool EquipAttachment(EAttachmentSlot SlotType, AAttachmentBase* NewAttachment);
+
+	UPROPERTY(VisibleAnywhere, Category = "Attachment Points")
+	UArrowComponent* ScopePoint;
 };

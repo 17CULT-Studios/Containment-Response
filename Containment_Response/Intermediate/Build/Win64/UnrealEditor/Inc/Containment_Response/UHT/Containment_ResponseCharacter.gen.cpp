@@ -13,6 +13,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_AContainment_ResponseCharacter_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
+	ENGINE_API UClass* Z_Construct_UClass_UChildActorComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UTextRenderComponent_NoRegister();
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
@@ -299,6 +300,10 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_MoveAction;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponChildComponent_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponChildComponent;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_NameTagText_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_NameTagText;
@@ -424,6 +429,14 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_MoveAction = { "MoveAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, MoveAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_MoveAction_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_MoveAction_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData[] = {
+		{ "Category", "Weapon" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent = { "WeaponChildComponent", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, WeaponChildComponent), Z_Construct_UClass_UChildActorComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText_MetaData[] = {
 		{ "Category", "NameTag" },
 		{ "EditInline", "true" },
@@ -486,6 +499,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_DefaultMappingContext,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_JumpAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_MoveAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_LookAction,
@@ -540,9 +554,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 4242211516U) },
+		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 3700535127U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_2422204681(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_1876765970(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

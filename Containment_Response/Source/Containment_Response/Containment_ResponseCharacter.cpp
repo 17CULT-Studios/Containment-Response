@@ -73,7 +73,10 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 			Mesh3P->SetAnimInstanceClass(Anim.Class);
 		}
 	}
-
+	WeaponChildComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("DefaultWeapon"));
+	WeaponChildComponent->SetupAttachment(RootComponent);
+	WeaponChildComponent->SetChildActorClass(AWeapon::StaticClass());
+	WeaponChildComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
 }
 
 void AContainment_ResponseCharacter::SetPlayerName(const FString& NewName)
@@ -102,6 +105,8 @@ void AContainment_ResponseCharacter::BeginPlay()
 		}
 	}
 
+	TArray<AActor*> AttachedActors;
+	GetAttachedActors(AttachedActors);
 }
 
 void AContainment_ResponseCharacter::Tick(float DeltaTime)

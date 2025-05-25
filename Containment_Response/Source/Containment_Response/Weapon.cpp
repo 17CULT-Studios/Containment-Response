@@ -2,15 +2,23 @@
 
 
 #include "Weapon.h"
-#include "Components/SkeletalMeshComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "AttachmentBase.h"
 
 AWeapon::AWeapon()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
-	WeaponMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("WeaponMesh"));
+	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 	RootComponent = WeaponMesh;
+
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> DummyMesh(TEXT("/Engine/BasicShapes/Cube.Cube"));
+
+	if (DummyMesh.Succeeded())
+	{
+		WeaponMesh->SetStaticMesh(DummyMesh.Object);
+		WeaponMesh->SetWorldScale3D(FVector(2.0f, 0.2f, 0.5f)); // Scale to make it gun-shaped
+	}
 
 	AttachmentSlots.Add(EAttachmentSlot::Scope, FAttachmentSlot{ EAttachmentSlot::Scope });
 	AttachmentSlots.Add(EAttachmentSlot::Muzzle, FAttachmentSlot{ EAttachmentSlot::Muzzle });
@@ -19,6 +27,12 @@ AWeapon::AWeapon()
 	AttachmentSlots.Add(EAttachmentSlot::Magazine, FAttachmentSlot{ EAttachmentSlot::Magazine });
 	AttachmentSlots.Add(EAttachmentSlot::Stock, FAttachmentSlot{ EAttachmentSlot::Stock });
 	AttachmentSlots.Add(EAttachmentSlot::Extra, FAttachmentSlot{ EAttachmentSlot::Extra });
+
+	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+
+	ScopePoint = CreateDefaultSubobject<UArrowComponent>(TEXT("ScopePoint"));
+	ScopePoint->SetupAttachment(WeaponMesh);
+	ScopePoint->SetRelativeLocation(FVector(0.0f, 0.0f, 10.0f));
 }
 
 void AWeapon::BeginPlay()
@@ -39,23 +53,37 @@ bool AWeapon::EquipAttachment(EAttachmentSlot SlotType, AAttachmentBase* NewAtta
 
 	if (AttachmentSlots.Contains(SlotType))
 	{
-		FName SocketName = NAME_None;
+		UE_LOG(LogTemp, Warning, TEXT("AttachmentSlots contains SlotType: %d"), (int32)SlotType);
+		USceneComponent* AttachPoint = nullptr;
 
-		switch (SlotType)
+		switch (static_cast<EAttachmentSlot>(SlotType))
 		{
-		case EAttachmentSlot::Scope: SocketName = TEXT("ScopeSocket"); break;
-		case EAttachmentSlot::Muzzle: SocketName = TEXT("MuzzleSocket"); break;
-		case EAttachmentSlot::Front_Grip: SocketName = TEXT("FrontGripSocket"); break;
-		case EAttachmentSlot::Back_Grip: SocketName = TEXT("BackGripSocket"); break;
-		case EAttachmentSlot::Magazine: SocketName = TEXT("MagSocket"); break;
-		case EAttachmentSlot::Stock: SocketName = TEXT("StockSocket"); break;
-		case EAttachmentSlot::Extra: SocketName = TEXT("ExtraSocket"); break;
+		default:
+			UE_LOG(LogTemp, Warning, TEXT("SlotType did not match any case!"));
+			break;
+		case EAttachmentSlot::Scope: AttachPoint = ScopePoint; break;
+		case EAttachmentSlot::Muzzle: AttachPoint = ScopePoint; break;
+		case EAttachmentSlot::Front_Grip: AttachPoint = ScopePoint; break;
+		case EAttachmentSlot::Back_Grip: AttachPoint = ScopePoint; break;
+		case EAttachmentSlot::Magazine: AttachPoint = ScopePoint; break;
+		case EAttachmentSlot::Stock: AttachPoint = ScopePoint; break;
+		case EAttachmentSlot::Extra: AttachPoint = ScopePoint; break;
 		}
 
-		NewAttachment->AttachToComponent(WeaponMesh, FAttachmentTransformRules::SnapToTargetNotIncludingScale, SocketName);
-		NewAttachment->OnEquip(this);
-		AttachmentSlots[SlotType].EquippedAttachment = NewAttachment;
-		return true;
+		if (SlotType == EAttachmentSlot::Scope)
+		{
+			AttachPoint = ScopePoint;
+			UE_LOG(LogTemp, Warning, TEXT("Matched Scope slot"));
+		}
+
+		if (AttachPoint)
+		{
+			NewAttachment->AttachToComponent(AttachPoint, FAttachmentTransformRules::SnapToTargetIncludingScale);
+			NewAttachment->OnEquip(this);
+			AttachmentSlots[SlotType].EquippedAttachment = NewAttachment;
+			return true;
+		}
+		
 	}
 	return false;
 }

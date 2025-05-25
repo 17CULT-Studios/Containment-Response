@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Weapon.h"
 #include "Containment_ResponseCharacter.generated.h"
 
 class UInputComponent;
@@ -50,6 +51,9 @@ public:
 	void SetPlayerName(const FString& NewName);
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	UChildActorComponent* WeaponChildComponent;
 
 protected:
 	virtual void BeginPlay();
