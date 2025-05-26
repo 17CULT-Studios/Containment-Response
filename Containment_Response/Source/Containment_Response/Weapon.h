@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/ArrowComponent.h"
 #include "Weapon.generated.h"
 
 
@@ -54,6 +53,27 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UStaticMeshComponent* WeaponMesh;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* ScopeMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* MuzzleMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* FrontGripMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* BackGripMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* MagMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* StockMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UStaticMeshComponent* ExtraMesh;
+
 	/** Base weapon stats */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon Stats")
 	float BaseDamage = 25.0f;
@@ -68,7 +88,4 @@ public:
 	/** Equip an attachment */
 	UFUNCTION(BlueprintCallable, Category = "Attachments")
 	bool EquipAttachment(EAttachmentSlot SlotType, AAttachmentBase* NewAttachment);
-
-	UPROPERTY(VisibleAnywhere, Category = "Attachment Points")
-	UArrowComponent* ScopePoint;
 };

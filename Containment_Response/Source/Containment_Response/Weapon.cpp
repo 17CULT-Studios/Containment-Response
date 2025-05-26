@@ -30,9 +30,27 @@ AWeapon::AWeapon()
 
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
-	ScopePoint = CreateDefaultSubobject<UArrowComponent>(TEXT("ScopePoint"));
-	ScopePoint->SetupAttachment(WeaponMesh);
-	ScopePoint->SetRelativeLocation(FVector(0.0f, 0.0f, 10.0f));
+	ScopeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ScopeMesh"));
+	ScopeMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ScopeMesh->SetupAttachment(RootComponent);
+	MuzzleMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MuzzleMesh"));
+	MuzzleMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	MuzzleMesh->SetupAttachment(RootComponent);
+	FrontGripMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FrontGripMesh"));
+	FrontGripMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	FrontGripMesh->SetupAttachment(RootComponent);
+	BackGripMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BackGripMesh"));
+	BackGripMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	BackGripMesh->SetupAttachment(RootComponent);
+	MagMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MagMesh"));
+	MagMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	MagMesh->SetupAttachment(RootComponent);
+	StockMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StockMesh"));
+	StockMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	StockMesh->SetupAttachment(RootComponent);
+	ExtraMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ExtraMesh"));
+	ExtraMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	ExtraMesh->SetupAttachment(RootComponent);
 }
 
 void AWeapon::BeginPlay()
@@ -56,24 +74,9 @@ bool AWeapon::EquipAttachment(EAttachmentSlot SlotType, AAttachmentBase* NewAtta
 		UE_LOG(LogTemp, Warning, TEXT("AttachmentSlots contains SlotType: %d"), (int32)SlotType);
 		USceneComponent* AttachPoint = nullptr;
 
-		switch (static_cast<EAttachmentSlot>(SlotType))
-		{
-		default:
-			UE_LOG(LogTemp, Warning, TEXT("SlotType did not match any case!"));
-			break;
-		case EAttachmentSlot::Scope: AttachPoint = ScopePoint; break;
-		case EAttachmentSlot::Muzzle: AttachPoint = ScopePoint; break;
-		case EAttachmentSlot::Front_Grip: AttachPoint = ScopePoint; break;
-		case EAttachmentSlot::Back_Grip: AttachPoint = ScopePoint; break;
-		case EAttachmentSlot::Magazine: AttachPoint = ScopePoint; break;
-		case EAttachmentSlot::Stock: AttachPoint = ScopePoint; break;
-		case EAttachmentSlot::Extra: AttachPoint = ScopePoint; break;
-		}
-
 		if (SlotType == EAttachmentSlot::Scope)
 		{
-			AttachPoint = ScopePoint;
-			UE_LOG(LogTemp, Warning, TEXT("Matched Scope slot"));
+			//will update the mesh corrosponding with the slottype
 		}
 
 		if (AttachPoint)
