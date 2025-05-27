@@ -9,7 +9,7 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class AAttachmentBase;
+class UStaticMesh;
 enum class EAttachmentSlot : uint8;
 #ifdef CONTAINMENT_RESPONSE_Weapon_generated_h
 #error "Weapon.generated.h already included, missing '#pragma once' in Weapon.h"

@@ -65,27 +65,44 @@ void AWeapon::Tick(float DeltaTime)
 
 }
 
-bool AWeapon::EquipAttachment(EAttachmentSlot SlotType, AAttachmentBase* NewAttachment)
+bool AWeapon::EquipAttachment(EAttachmentSlot SlotType, UStaticMesh* NewAttachment)
 {
 	if (!NewAttachment) return false;
 
 	if (AttachmentSlots.Contains(SlotType))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AttachmentSlots contains SlotType: %d"), (int32)SlotType);
-		USceneComponent* AttachPoint = nullptr;
 
 		if (SlotType == EAttachmentSlot::Scope)
 		{
-			//will update the mesh corrosponding with the slottype
+			ScopeMesh->SetStaticMesh(NewAttachment);
+		}
+		if (SlotType == EAttachmentSlot::Muzzle)
+		{
+			MuzzleMesh->SetStaticMesh(NewAttachment);
+		}
+		if (SlotType == EAttachmentSlot::Front_Grip)
+		{
+			FrontGripMesh->SetStaticMesh(NewAttachment);
+		}
+		if (SlotType == EAttachmentSlot::Back_Grip)
+		{
+			BackGripMesh->SetStaticMesh(NewAttachment);
+		}
+		if (SlotType == EAttachmentSlot::Magazine)
+		{
+			MagMesh->SetStaticMesh(NewAttachment);
+		}
+		if (SlotType == EAttachmentSlot::Stock)
+		{
+			StockMesh->SetStaticMesh(NewAttachment);
+		}
+		if (SlotType == EAttachmentSlot::Extra)
+		{
+			ExtraMesh->SetStaticMesh(NewAttachment);
 		}
 
-		if (AttachPoint)
-		{
-			NewAttachment->AttachToComponent(AttachPoint, FAttachmentTransformRules::SnapToTargetIncludingScale);
-			NewAttachment->OnEquip(this);
-			AttachmentSlots[SlotType].EquippedAttachment = NewAttachment;
-			return true;
-		}
+		return true;
 		
 	}
 	return false;

@@ -87,5 +87,5 @@ public:
 
 	/** Equip an attachment */
 	UFUNCTION(BlueprintCallable, Category = "Attachments")
-	bool EquipAttachment(EAttachmentSlot SlotType, AAttachmentBase* NewAttachment);
+	bool EquipAttachment(EAttachmentSlot SlotType, UStaticMesh* NewAttachment);
 };
