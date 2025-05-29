@@ -12,12 +12,13 @@ AWeapon::AWeapon()
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 	RootComponent = WeaponMesh;
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> DummyMesh(TEXT("/Engine/BasicShapes/Cube.Cube"));
+	static ConstructorHelpers::FObjectFinder<UStaticMesh> DummyMesh(TEXT("/Game/Meshes/Weapon/Primary/StartingPrimary"));
 
 	if (DummyMesh.Succeeded())
 	{
 		WeaponMesh->SetStaticMesh(DummyMesh.Object);
-		WeaponMesh->SetWorldScale3D(FVector(2.0f, 0.2f, 0.5f)); // Scale to make it gun-shaped
+		WeaponMesh->SetWorldScale3D(FVector(20.0f, 20.0f, 20.0f));
+		WeaponMesh->SetWorldRotation(FRotator(0.0f, 0.0f, 90.0f));
 	}
 
 	AttachmentSlots.Add(EAttachmentSlot::Scope, FAttachmentSlot{ EAttachmentSlot::Scope });
@@ -33,9 +34,12 @@ AWeapon::AWeapon()
 	ScopeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ScopeMesh"));
 	ScopeMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ScopeMesh->SetupAttachment(RootComponent);
+	ScopeMesh->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));
+	ScopeMesh->SetRelativeLocation(FVector(0.0f, -0.45f, 0.0f));
 	MuzzleMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MuzzleMesh"));
 	MuzzleMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	MuzzleMesh->SetupAttachment(RootComponent);
+	MuzzleMesh->SetRelativeLocation(FVector(0.0f, 20.0f, 50.0f));
 	FrontGripMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("FrontGripMesh"));
 	FrontGripMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	FrontGripMesh->SetupAttachment(RootComponent);

@@ -45,7 +45,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 
 	NameTagText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("NameTagText"));
 	NameTagText->SetupAttachment(RootComponent);
-	NameTagText->SetRelativeLocation(FVector(0.f, 0.f, 100.f));
+	NameTagText->SetRelativeLocation(FVector(10.f, 0.f, 100.f));
 	NameTagText->SetHorizontalAlignment(EHTA_Center);
 	NameTagText->SetVerticalAlignment(EVRTA_TextCenter);
 	NameTagText->SetTextRenderColor(FColor::White);
@@ -76,7 +76,8 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	WeaponChildComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("DefaultWeapon"));
 	WeaponChildComponent->SetupAttachment(RootComponent);
 	WeaponChildComponent->SetChildActorClass(AWeapon::StaticClass());
-	WeaponChildComponent->SetRelativeLocation(FVector(0.0f, 0.0f, 100.0f));
+	WeaponChildComponent->SetRelativeLocation(FVector(0.0f, 20.0f, 50.0f));
+	WeaponChildComponent->SetRelativeRotation(FRotator(0.0f, 90.0f, 90.0f));
 }
 
 void AContainment_ResponseCharacter::SetPlayerName(const FString& NewName)
