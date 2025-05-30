@@ -3,6 +3,7 @@
 
 #include "Weapon.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "AttachmentBase.h"
 
 AWeapon::AWeapon()
@@ -55,6 +56,9 @@ AWeapon::AWeapon()
 	ExtraMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ExtraMesh"));
 	ExtraMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ExtraMesh->SetupAttachment(RootComponent);
+
+	//New Damage Setup
+	//UGameplayStatics::ApplyDamage()
 }
 
 void AWeapon::BeginPlay()
@@ -110,5 +114,40 @@ bool AWeapon::EquipAttachment(EAttachmentSlot SlotType, UStaticMesh* NewAttachme
 		
 	}
 	return false;
+}
+
+void AWeapon::FireGun()
+{
+	FVector Start = GetActorLocation();
+
+	FVector Direction = GetActorForwardVector().RotateAngleAxis(-90.0f, FVector::UpVector);
+
+	FVector End = Start + Direction * 1000;
+
+	FHitResult HitResult;
+	FCollisionQueryParams TraceParams(FName(TEXT("RayTrace")), true, this);
+
+	bool bHit = GetWorld()->LineTraceSingleByChannel(
+		HitResult,
+		Start,
+		End,
+		ECC_Visibility,
+		TraceParams
+	);
+
+	FColor LineColor = bHit ? FColor::Red : FColor::Green;
+
+	DrawDebugLine(
+		GetWorld(),
+		Start,
+		End,
+		LineColor,
+		false,
+		2.0f,
+		0,
+		2.0f
+	);
+
+
 }
 

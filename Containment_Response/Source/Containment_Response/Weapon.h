@@ -88,4 +88,7 @@ public:
 	/** Equip an attachment */
 	UFUNCTION(BlueprintCallable, Category = "Attachments")
 	bool EquipAttachment(EAttachmentSlot SlotType, UStaticMesh* NewAttachment);
+
+	UFUNCTION(BlueprintCallable, Category = "Fire")
+	void FireGun();
 };

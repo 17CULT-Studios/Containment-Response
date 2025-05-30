@@ -44,6 +44,9 @@ class AContainment_ResponseCharacter : public ACharacter
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ShootAction;
 	
 public:
 	AContainment_ResponseCharacter();
@@ -94,6 +97,8 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool GetAtTable();
+
+	void Shoot();
 
 protected:
 	/** Called for movement input */

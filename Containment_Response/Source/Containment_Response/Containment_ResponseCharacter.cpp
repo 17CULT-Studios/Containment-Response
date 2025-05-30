@@ -76,7 +76,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	WeaponChildComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("DefaultWeapon"));
 	WeaponChildComponent->SetupAttachment(RootComponent);
 	WeaponChildComponent->SetChildActorClass(AWeapon::StaticClass());
-	WeaponChildComponent->SetRelativeLocation(FVector(0.0f, 20.0f, 50.0f));
+	WeaponChildComponent->SetRelativeLocation(FVector(45.0f, 10.0f, 45.0f));
 	WeaponChildComponent->SetRelativeRotation(FRotator(0.0f, 90.0f, 90.0f));
 }
 
@@ -150,6 +150,9 @@ void AContainment_ResponseCharacter::SetupPlayerInputComponent(UInputComponent* 
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AContainment_ResponseCharacter::Look);
+
+		//Shooting
+		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &AContainment_ResponseCharacter::Shoot);
 	}
 	else
 	{
@@ -202,4 +205,14 @@ void AContainment_ResponseCharacter::SetAtTable(bool bNewAtTable)
 bool AContainment_ResponseCharacter::GetAtTable()
 {
 	return bAtTable;
+}
+
+void AContainment_ResponseCharacter::Shoot()
+{
+	AWeapon* tempWeapon = Cast<AWeapon>(WeaponChildComponent->GetChildActor());
+
+	if (tempWeapon != nullptr)
+	{
+		tempWeapon->FireGun();
+	}
 }

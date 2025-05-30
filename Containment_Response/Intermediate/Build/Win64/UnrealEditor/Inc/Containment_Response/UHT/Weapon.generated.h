@@ -28,6 +28,7 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<struct FAttachme
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execFireGun); \
 	DECLARE_FUNCTION(execEquipAttachment);
 
 

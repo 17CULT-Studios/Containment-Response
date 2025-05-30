@@ -165,6 +165,13 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FAttachmentSlot>
 		}
 		return Z_Registration_Info_UScriptStruct_AttachmentSlot.InnerSingleton;
 	}
+	DEFINE_FUNCTION(AWeapon::execFireGun)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->FireGun();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AWeapon::execEquipAttachment)
 	{
 		P_GET_ENUM(EAttachmentSlot,Z_Param_SlotType);
@@ -179,6 +186,7 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FAttachmentSlot>
 		UClass* Class = AWeapon::StaticClass();
 		static const FNameNativePtrPair Funcs[] = {
 			{ "EquipAttachment", &AWeapon::execEquipAttachment },
+			{ "FireGun", &AWeapon::execFireGun },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -236,6 +244,29 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FAttachmentSlot>
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AWeapon_EquipAttachment_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AWeapon_FireGun_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AWeapon_FireGun_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Fire" },
+		{ "ModuleRelativePath", "Weapon.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AWeapon_FireGun_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AWeapon, nullptr, "FireGun", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AWeapon_FireGun_Statics::Function_MetaDataParams), Z_Construct_UFunction_AWeapon_FireGun_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AWeapon_FireGun()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AWeapon_FireGun_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -309,6 +340,7 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FAttachmentSlot>
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AWeapon_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AWeapon_EquipAttachment, "EquipAttachment" }, // 2045176691
+		{ &Z_Construct_UFunction_AWeapon_FireGun, "FireGun" }, // 2624667451
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AWeapon_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -485,9 +517,9 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FAttachmentSlot>
 		{ FAttachmentSlot::StaticStruct, Z_Construct_UScriptStruct_FAttachmentSlot_Statics::NewStructOps, TEXT("AttachmentSlot"), &Z_Registration_Info_UScriptStruct_AttachmentSlot, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FAttachmentSlot), 3643194279U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AWeapon, AWeapon::StaticClass, TEXT("AWeapon"), &Z_Registration_Info_UClass_AWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeapon), 4026857308U) },
+		{ Z_Construct_UClass_AWeapon, AWeapon::StaticClass, TEXT("AWeapon"), &Z_Registration_Info_UClass_AWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AWeapon), 115461063U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_1226105139(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_3028160176(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_Statics::EnumInfo));
