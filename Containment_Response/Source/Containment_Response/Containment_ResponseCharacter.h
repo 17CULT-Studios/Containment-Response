@@ -51,11 +51,11 @@ class AContainment_ResponseCharacter : public ACharacter
 public:
 	AContainment_ResponseCharacter();
 
-	void SetPlayerName(const FString& NewName);
+	void SetPlayerName(const FString& NewName); // gets steam name
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")//Primary Weapon
 	UChildActorComponent* WeaponChildComponent;
 
 protected:
@@ -63,7 +63,7 @@ protected:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NameTag")
-	class UTextRenderComponent* NameTagText;
+	class UTextRenderComponent* NameTagText; // overhead name that will be your steam name
 
 	UPROPERTY(ReplicatedUsing = OnRep_PlayerName)
 	FString PlayerName;
@@ -89,6 +89,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool GetHasRifle();
 
+	// if player is close to the weapon mod table the player can interact with it
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon)
 	bool bAtTable;
 

@@ -118,9 +118,9 @@ bool AWeapon::EquipAttachment(EAttachmentSlot SlotType, UStaticMesh* NewAttachme
 
 void AWeapon::FireGun()
 {
-	FVector Start = GetActorLocation();
+	FVector Start = WeaponMesh->GetComponentLocation();
 
-	FVector Direction = GetActorForwardVector().RotateAngleAxis(-90.0f, FVector::UpVector);
+	FVector Direction = WeaponMesh->GetForwardVector();// .RotateAngleAxis(-90.0f, FVector::UpVector);
 
 	FVector End = Start + Direction * 1000;
 

@@ -443,8 +443,14 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData[] = {
 		{ "Category", "Weapon" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Primary Weapon\n" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Primary Weapon" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent = { "WeaponChildComponent", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, WeaponChildComponent), Z_Construct_UClass_UChildActorComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData) };
@@ -458,7 +464,13 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText = { "NameTagText", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, NameTagText), Z_Construct_UClass_UTextRenderComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// overhead name that will be your steam name\n" },
+#endif
 		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "overhead name that will be your steam name" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName = { "PlayerName", "OnRep_PlayerName", (EPropertyFlags)0x0020080100000020, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, PlayerName), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName_MetaData) };
@@ -496,7 +508,13 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_MetaData[] = {
 		{ "Category", "Weapon" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// if player is close to the weapon mod table the player can interact with it\n" },
+#endif
 		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "if player is close to the weapon mod table the player can interact with it" },
+#endif
 	};
 #endif
 	void Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_bAtTable_SetBit(void* Obj)
@@ -567,9 +585,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 1447386872U) },
+		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 2546548314U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_1820108551(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_137353079(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

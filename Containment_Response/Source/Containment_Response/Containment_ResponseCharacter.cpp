@@ -43,6 +43,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	Mesh1P->CastShadow = false;
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
 
+	//Steam Name Tag
 	NameTagText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("NameTagText"));
 	NameTagText->SetupAttachment(RootComponent);
 	NameTagText->SetRelativeLocation(FVector(10.f, 0.f, 100.f));
@@ -56,6 +57,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	static ConstructorHelpers::FClassFinder<UAnimInstance> Anim(TEXT("/Game/Characters/Mannequins/Animations/ABP_Manny"));
 	if (MeshAsset.Succeeded())
 	{
+		//Third person mesh for multiplayer
 		Mesh3P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("MeshAsset"));
 		Mesh3P->SetSkeletalMesh(MeshAsset.Object);
 		Mesh3P->SetAnimInstanceClass(Anim.Class);
@@ -70,9 +72,11 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	
 		if (Anim.Succeeded())
 		{
+			//third person animations
 			Mesh3P->SetAnimInstanceClass(Anim.Class);
 		}
 	}
+	//primary Weapon setup
 	WeaponChildComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("DefaultWeapon"));
 	WeaponChildComponent->SetupAttachment(RootComponent);
 	WeaponChildComponent->SetChildActorClass(AWeapon::StaticClass());
@@ -114,7 +118,7 @@ void AContainment_ResponseCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (NameTagText && GetWorld())
+	if (NameTagText && GetWorld())//makes nametags always face the player
 	{
 		APlayerController* PC = GetWorld()->GetFirstPlayerController();
 		if (PC && PC->PlayerCameraManager)
@@ -123,6 +127,16 @@ void AContainment_ResponseCharacter::Tick(float DeltaTime)
 			FRotator LookAtRot = FRotationMatrix::MakeFromX(CamLoc - NameTagText->GetComponentLocation()).Rotator();
 			NameTagText->SetWorldRotation(LookAtRot);
 		}
+	}
+
+	if (WeaponChildComponent && FirstPersonCameraComponent)//tilts the weapon
+	{
+		FRotator CameraRot = FirstPersonCameraComponent->GetComponentRotation();
+
+		FRotator NewMeshRot = WeaponChildComponent->GetRelativeRotation();
+		NewMeshRot.Roll = CameraRot.Pitch + 90;
+
+		WeaponChildComponent->SetRelativeRotation(NewMeshRot);
 	}
 }
 
@@ -207,7 +221,7 @@ bool AContainment_ResponseCharacter::GetAtTable()
 	return bAtTable;
 }
 
-void AContainment_ResponseCharacter::Shoot()
+void AContainment_ResponseCharacter::Shoot()// if weapon exists shoot
 {
 	AWeapon* tempWeapon = Cast<AWeapon>(WeaponChildComponent->GetChildActor());
 

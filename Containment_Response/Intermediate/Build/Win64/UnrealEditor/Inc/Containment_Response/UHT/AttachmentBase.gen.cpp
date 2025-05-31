@@ -54,11 +54,11 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AAttachmentBase_OnEquip_Statics::Function_MetaDataParams[] = {
 		{ "Category", "Attachment" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Called when this attachment is equipped */" },
+		{ "Comment", "// ------call to equip to weapon-----\n" },
 #endif
 		{ "ModuleRelativePath", "AttachmentBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Called when this attachment is equipped" },
+		{ "ToolTip", "------call to equip to weapon-----" },
 #endif
 	};
 #endif
@@ -117,7 +117,7 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAttachmentBase_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_AAttachmentBase_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_AAttachmentBase_OnEquip, "OnEquip" }, // 3815299811
+		{ &Z_Construct_UFunction_AAttachmentBase_OnEquip, "OnEquip" }, // 2100455334
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AAttachmentBase_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -132,11 +132,11 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAttachmentBase_Statics::NewProp_AttachmentName_MetaData[] = {
 		{ "Category", "Attachment" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Name of this attachment */" },
+		{ "Comment", "// -----Name Of Attachment-----\n" },
 #endif
 		{ "ModuleRelativePath", "AttachmentBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Name of this attachment" },
+		{ "ToolTip", "-----Name Of Attachment-----" },
 #endif
 	};
 #endif
@@ -145,11 +145,11 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAttachmentBase_Statics::NewProp_AttachmentMesh_MetaData[] = {
 		{ "Category", "Attachment" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Static mesh for visual representation */" },
+		{ "Comment", "// -----Attachment mesh-----\n" },
 #endif
 		{ "ModuleRelativePath", "AttachmentBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Static mesh for visual representation" },
+		{ "ToolTip", "-----Attachment mesh-----" },
 #endif
 	};
 #endif
@@ -158,11 +158,11 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAttachmentBase_Statics::NewProp_DamageModifier_MetaData[] = {
 		{ "Category", "Attachment" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "/** Optional: Modify weapon stats (damage, fire rate, etc.) */" },
+		{ "Comment", "// -----Attachment Stats-----\n" },
 #endif
 		{ "ModuleRelativePath", "AttachmentBase.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "Optional: Modify weapon stats (damage, fire rate, etc.)" },
+		{ "ToolTip", "-----Attachment Stats-----" },
 #endif
 	};
 #endif
@@ -178,7 +178,13 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AAttachmentBase_Statics::NewProp_SlotType_MetaData[] = {
 		{ "Category", "Attachment" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// -----What Kind Of Attachment it is ie. scope-----\n" },
+#endif
 		{ "ModuleRelativePath", "AttachmentBase.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "-----What Kind Of Attachment it is ie. scope-----" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AAttachmentBase_Statics::NewProp_SlotType = { "SlotType", nullptr, (EPropertyFlags)0x0010000000010015, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AAttachmentBase, SlotType), Z_Construct_UEnum_Containment_Response_EAttachmentSlot, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AAttachmentBase_Statics::NewProp_SlotType_MetaData), Z_Construct_UClass_AAttachmentBase_Statics::NewProp_SlotType_MetaData) }; // 2305370956
@@ -229,9 +235,9 @@ void EmptyLinkFunctionForGeneratedCodeAttachmentBase() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_AttachmentBase_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AAttachmentBase, AAttachmentBase::StaticClass, TEXT("AAttachmentBase"), &Z_Registration_Info_UClass_AAttachmentBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAttachmentBase), 2967083204U) },
+		{ Z_Construct_UClass_AAttachmentBase, AAttachmentBase::StaticClass, TEXT("AAttachmentBase"), &Z_Registration_Info_UClass_AAttachmentBase, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAttachmentBase), 1052577933U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_AttachmentBase_h_1017003828(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_AttachmentBase_h_2014012770(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_AttachmentBase_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_AttachmentBase_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

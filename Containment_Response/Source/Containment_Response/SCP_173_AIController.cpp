@@ -12,7 +12,7 @@
 
 ASCP_173_AIController::ASCP_173_AIController()
 {
-    PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bCanEverTick = false;
 }
 
 void ASCP_173_AIController::OnPossess(APawn* InPawn)

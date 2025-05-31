@@ -44,7 +44,7 @@ public:
 	bool IsMoving() const;
 
 	UFUNCTION(BlueprintCallable)
-	FVector GetSimulatedVelocity() const { return SimulatedVelocity; }
+	FVector GetSimulatedVelocity() const { return SimulatedVelocity; }//tryed to trick the animation did not word
 
 private:
 	float DTime;
