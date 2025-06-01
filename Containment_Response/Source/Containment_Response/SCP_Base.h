@@ -3,11 +3,15 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "Components/SceneComponent.h"
 #include "SCP_Base.generated.h"
 
 UCLASS()
-class CONTAINMENT_RESPONSE_API ASCP_Base : public AActor
+class CONTAINMENT_RESPONSE_API ASCP_Base : public APawn
 {
 	GENERATED_BODY()
 	
@@ -59,6 +63,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
 	float SanityDrainAmount;
 
+	//---------- Looks/Info ----------
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
+	UCapsuleComponent* CollisionCapsule;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
+	UStaticMeshComponent* SCPMesh;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
+	UFloatingPawnMovement* MovementComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
+	USceneComponent* HeadComponent;
 
 	//---------- FUNCTIONS ----------
 	UFUNCTION(BlueprintCallable, Category = "SCPFunctions")

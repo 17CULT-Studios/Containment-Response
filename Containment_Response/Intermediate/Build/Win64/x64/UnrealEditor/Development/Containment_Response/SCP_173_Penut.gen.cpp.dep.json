@@ -7,6 +7,11 @@
         "Includes": [
             "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\containment_response\\definitions.containment_response.h",
             "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\source\\containment_response\\scp_173_penut.h",
+            "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\source\\containment_response\\scp_base.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\components\\capsulecomponent.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\capsulecomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\floatingpawnmovement.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\pawnmovementcomponent.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\source\\runtime\\engine\\classes\\gameframework\\navmovementcomponent.h",
@@ -17,6 +22,7 @@
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\navmovementcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\pawnmovementcomponent.generated.h",
             "c:\\program files\\epic games\\ue_5.3\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\floatingpawnmovement.generated.h",
+            "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\intermediate\\build\\win64\\unrealeditor\\inc\\containment_response\\uht\\scp_base.generated.h",
             "c:\\users\\smit2129\\desktop\\containment-response\\containment_response\\intermediate\\build\\win64\\unrealeditor\\inc\\containment_response\\uht\\scp_173_penut.generated.h"
         ],
         "ImportedModules": [],

@@ -2,66 +2,36 @@
 
 
 #include "SCP_173_Penut.h"
-#include "Engine/World.h"
-#include "GameFramework/Character.h"
-#include "GameFramework/PlayerController.h"
-#include "Components/CapsuleComponent.h"
-#include "Kismet/GameplayStatics.h"
 #include "SCP_173_AIController.h"
-#include "EngineUtils.h"
-
-#include "NavigationSystem.h"
-//#include "AI/Navigation/NavigationSystem.h"
-#include "NavMesh/NavMeshBoundsVolume.h"
-#include "NavigationPath.h"
-#include "Net/UnrealNetwork.h"
+#include "Components/CapsuleComponent.h"
+#include "GameFramework/FloatingPawnMovement.h"
+#include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
+#include "Net/UnrealNetwork.h"
 #include "EngineUtils.h"
+#include "SCP_Base.h"
 
 ASCP_173_Penut::ASCP_173_Penut()
 {
     bReplicates = true;
-
     PrimaryActorTick.bCanEverTick = true;
 
-    CollisionCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionCapsule"));
-    CollisionCapsule->InitCapsuleSize(42.f, 96.f);
-    CollisionCapsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    
     CollisionCapsule->SetCollisionResponseToChannel(ECC_Camera, ECR_Block);
-    CollisionCapsule->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
-    CollisionCapsule->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Block);
-    RootComponent = CollisionCapsule;
-    SCPMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SCPMesh"));
-    SCPMesh->SetupAttachment(RootComponent);
-    SCPMesh->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
-    SCPMesh->SetCollisionResponseToAllChannels(ECR_Ignore);
-    SCPMesh->SetCollisionResponseToChannel(ECC_Camera, ECR_Block);
-    SCPMesh->SetRelativeLocation(FVector(0.f, 0.f, 0.f));
-    SCPMesh->SetSimulatePhysics(false);
-    SCPMesh->SetEnableGravity(false);
-    MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
-    MovementComponent->UpdatedComponent = CollisionCapsule;
-    HeadComponent = CreateDefaultSubobject<USceneComponent>(TEXT("HeadComponent"));
-    HeadComponent->SetupAttachment(CollisionCapsule);
+    SCPMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     HeadComponent->SetRelativeLocation(FVector(0.f, 0.f, 80.f));
+
+    SCPID = TEXT("173");
+    SCPName = TEXT("The Sculpture");
+    SCPClass = TEXT("Euclid");
+    MaxHealth = 150.f;
+    CurrentHealth = MaxHealth;
+    bCanTeleport = true;
+
+    DeactivationDelay = 60.f;
     bIsActive = false;
     bIsChasingPlayer = false;
-    TimeSinceLastSeen = 0.f;
-    DeactivationDelay = 60.f;
-
-    AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
-
-    UE_LOG(LogTemp, Warning, TEXT("Capsule collision enabled: %d"), (int)CollisionCapsule->GetCollisionEnabled());
-    UE_LOG(LogTemp, Warning, TEXT("Capsule object type: %d"), (int)CollisionCapsule->GetCollisionObjectType());
-    UE_LOG(LogTemp, Warning, TEXT("Capsule visibility response: %d"),
-        (int)CollisionCapsule->GetCollisionResponseToChannel(ECC_Camera));
-}
-
-void ASCP_173_Penut::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-    DOREPLIFETIME(ASCP_173_Penut, ReplicatedRotation)
 }
 
 void ASCP_173_Penut::BeginPlay()
@@ -78,26 +48,22 @@ void ASCP_173_Penut::BeginPlay()
     }
 }
 
-void ASCP_173_Penut::OnRep_ReplicatedRotation()
-{
-    SCPMesh->SetWorldRotation(ReplicatedRotation);
-}
-
 void ASCP_173_Penut::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
 
     FindClosestPlayer();
-
     if (!TargetPlayer || !AIController) return;
 
     if (bIsActive)
     {
         bool bSeen = IsObserved();
+
         if (debug)
         {
             UE_LOG(LogTemp, Warning, TEXT("Observed: %s"), bSeen ? TEXT("YES") : TEXT("NO"));
         }
+
         if (bSeen)
         {
             if (debug)
@@ -152,10 +118,27 @@ void ASCP_173_Penut::Tick(float DeltaTime)
     }
 }
 
+void ASCP_173_Penut::UseAbility()
+{
+    AttemptKill();
+}
+
+void ASCP_173_Penut::AttemptKill()
+{
+    if (!TargetPlayer) return;
+
+    float Distance = FVector::Dist(GetActorLocation(), TargetPlayer->GetActorLocation());
+    if (Distance <= SnapKillRange)
+    {
+        UGameplayStatics::ApplyDamage(TargetPlayer, 9999.0f, nullptr, this, nullptr);
+    }
+}
+
 void ASCP_173_Penut::ActivateSCP()
 {
     bIsActive = true;
     TimeSinceLastSeen = 0.f;
+
     if (debug)
     {
         UE_LOG(LogTemp, Warning, TEXT("Activated"));
@@ -167,7 +150,7 @@ void ASCP_173_Penut::DeactivateSCP()
     bIsActive = false;
     bIsChasingPlayer = false;
     TimeSinceLastSeen = 0.f;
-    TeleportToRandomLocation();
+
     if (debug)
     {
         UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
@@ -253,32 +236,14 @@ bool ASCP_173_Penut::IsObserved()
     return false;
 }
 
-void ASCP_173_Penut::TeleportToRandomLocation()
+void ASCP_173_Penut::OnRep_ReplicatedRotation()
 {
-    float TeleportRadius = 2000.0f;
-
-    UNavigationSystemV1* NavSystem = UNavigationSystemV1::GetCurrent(GetWorld());
-    if (NavSystem)
-    {
-        FVector Origin = GetActorLocation();
-
-        FNavLocation RandomNavPoint;
-
-        if (NavSystem->GetRandomPointInNavigableRadius(Origin, TeleportRadius, RandomNavPoint))
-        {
-            SetActorLocation(RandomNavPoint);
-            if (debug)
-            {
-                UE_LOG(LogTemp, Warning, TEXT("Teleporting to valid point at: %s"), *RandomNavPoint.Location.ToString());
-            }
-        }
-        else
-        {
-            if (debug)
-            {
-                UE_LOG(LogTemp, Warning, TEXT("No valid point found on NavMesh for teleportation."));
-            }
-        }
-    }
+    SCPMesh->SetWorldRotation(ReplicatedRotation);
 }
 
+void ASCP_173_Penut::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+    Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+    DOREPLIFETIME(ASCP_173_Penut, ReplicatedRotation);
+}

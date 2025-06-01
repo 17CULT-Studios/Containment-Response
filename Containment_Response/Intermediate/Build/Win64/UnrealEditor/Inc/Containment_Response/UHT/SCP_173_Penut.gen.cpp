@@ -11,12 +11,8 @@ void EmptyLinkFunctionForGeneratedCodeSCP_173_Penut() {}
 // Cross Module References
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_173_Penut();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_173_Penut_NoRegister();
+	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_Base();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FRotator();
-	ENGINE_API UClass* Z_Construct_UClass_APawn();
-	ENGINE_API UClass* Z_Construct_UClass_UCapsuleComponent_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_UFloatingPawnMovement_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_USceneComponent_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
 // End Cross Module References
 	DEFINE_FUNCTION(ASCP_173_Penut::execOnRep_ReplicatedRotation)
@@ -46,7 +42,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_173_Penut() {}
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASCP_173_Penut, nullptr, "OnRep_ReplicatedRotation", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASCP_173_Penut, nullptr, "OnRep_ReplicatedRotation", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation_Statics::Function_MetaDataParams) };
 	UFunction* Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -69,21 +65,36 @@ void EmptyLinkFunctionForGeneratedCodeSCP_173_Penut() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_SCPMesh_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsActive_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_SCPMesh;
+		static void NewProp_bIsActive_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsActive;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_CollisionCapsule_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsChasingPlayer_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_CollisionCapsule;
+		static void NewProp_bIsChasingPlayer_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsChasingPlayer;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_MovementComponent_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_TimeSinceLastSeen_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_MovementComponent;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_TimeSinceLastSeen;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_HeadComponent_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_DeactivationDelay_MetaData[];
 #endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_HeadComponent;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_DeactivationDelay;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_playerFOV_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_playerFOV;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_debug_MetaData[];
+#endif
+		static void NewProp_debug_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_debug;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SnapKillRange_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_SnapKillRange;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_ReplicatedRotation_MetaData[];
 #endif
@@ -93,63 +104,114 @@ void EmptyLinkFunctionForGeneratedCodeSCP_173_Penut() {}
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
 	UObject* (*const Z_Construct_UClass_ASCP_173_Penut_Statics::DependentSingletons[])() = {
-		(UObject* (*)())Z_Construct_UClass_APawn,
+		(UObject* (*)())Z_Construct_UClass_ASCP_Base,
 		(UObject* (*)())Z_Construct_UPackage__Script_Containment_Response,
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::DependentSingletons) < 16);
 	const FClassFunctionLinkInfo Z_Construct_UClass_ASCP_173_Penut_Statics::FuncInfo[] = {
-		{ &Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation, "OnRep_ReplicatedRotation" }, // 1675379460
+		{ &Z_Construct_UFunction_ASCP_173_Penut_OnRep_ReplicatedRotation, "OnRep_ReplicatedRotation" }, // 1579090549
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::Class_MetaDataParams[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * SCP-173 (\"The Sculpture\") class.\n * Inherits base SCP properties and overrides behavior like freezing when observed,\n * moving quickly when unobserved, and snapping necks.\n */" },
+#endif
 		{ "HideCategories", "Navigation" },
 		{ "IncludePath", "SCP_173_Penut.h" },
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "SCP-173 (\"The Sculpture\") class.\nInherits base SCP properties and overrides behavior like freezing when observed,\nmoving quickly when unobserved, and snapping necks." },
+#endif
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SCPMesh_MetaData[] = {
-		{ "Category", "Components" },
-		{ "EditInline", "true" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive_MetaData[] = {
+		{ "Category", "SCP_173" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//----------------- Components -----------------\n" },
+#endif
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "----------------- Components -----------------" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SCPMesh = { "SCPMesh", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, SCPMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SCPMesh_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SCPMesh_MetaData) };
+	void Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive_SetBit(void* Obj)
+	{
+		((ASCP_173_Penut*)Obj)->bIsActive = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive = { "bIsActive", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ASCP_173_Penut), &Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_CollisionCapsule_MetaData[] = {
-		{ "Category", "SCP_173_Penut" },
-		{ "EditInline", "true" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer_MetaData[] = {
+		{ "Category", "SCP_173" },
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_CollisionCapsule = { "CollisionCapsule", nullptr, (EPropertyFlags)0x00200800000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, CollisionCapsule), Z_Construct_UClass_UCapsuleComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_CollisionCapsule_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_CollisionCapsule_MetaData) };
+	void Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer_SetBit(void* Obj)
+	{
+		((ASCP_173_Penut*)Obj)->bIsChasingPlayer = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer = { "bIsChasingPlayer", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ASCP_173_Penut), &Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_MovementComponent_MetaData[] = {
-		{ "Category", "SCP_173_Penut" },
-		{ "EditInline", "true" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_TimeSinceLastSeen_MetaData[] = {
+		{ "Category", "SCP_173" },
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_MovementComponent = { "MovementComponent", nullptr, (EPropertyFlags)0x00200800000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, MovementComponent), Z_Construct_UClass_UFloatingPawnMovement_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_MovementComponent_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_MovementComponent_MetaData) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_TimeSinceLastSeen = { "TimeSinceLastSeen", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, TimeSinceLastSeen), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_TimeSinceLastSeen_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_TimeSinceLastSeen_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_HeadComponent_MetaData[] = {
-		{ "EditInline", "true" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_DeactivationDelay_MetaData[] = {
+		{ "Category", "SCP_173" },
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
 	};
 #endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_HeadComponent = { "HeadComponent", nullptr, (EPropertyFlags)0x0020080000080008, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, HeadComponent), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_HeadComponent_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_HeadComponent_MetaData) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_DeactivationDelay = { "DeactivationDelay", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, DeactivationDelay), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_DeactivationDelay_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_DeactivationDelay_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_playerFOV_MetaData[] = {
+		{ "Category", "SCP_173" },
+		{ "ModuleRelativePath", "SCP_173_Penut.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_playerFOV = { "playerFOV", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, playerFOV), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_playerFOV_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_playerFOV_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug_MetaData[] = {
+		{ "Category", "SCP_173" },
+		{ "ModuleRelativePath", "SCP_173_Penut.h" },
+	};
+#endif
+	void Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug_SetBit(void* Obj)
+	{
+		((ASCP_173_Penut*)Obj)->debug = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug = { "debug", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ASCP_173_Penut), &Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SnapKillRange_MetaData[] = {
+		{ "Category", "SCP_173" },
+		{ "ModuleRelativePath", "SCP_173_Penut.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SnapKillRange = { "SnapKillRange", nullptr, (EPropertyFlags)0x0010000000010001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, SnapKillRange), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SnapKillRange_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SnapKillRange_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation_MetaData[] = {
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//----------------- Networking -----------------\n" },
+#endif
 		{ "ModuleRelativePath", "SCP_173_Penut.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "----------------- Networking -----------------" },
+#endif
 	};
 #endif
-	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation = { "ReplicatedRotation", "OnRep_ReplicatedRotation", (EPropertyFlags)0x0020080100000020, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, ReplicatedRotation), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation_MetaData) };
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation = { "ReplicatedRotation", "OnRep_ReplicatedRotation", (EPropertyFlags)0x0010000100000020, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_173_Penut, ReplicatedRotation), Z_Construct_UScriptStruct_FRotator, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation_MetaData), Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASCP_173_Penut_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SCPMesh,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_CollisionCapsule,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_MovementComponent,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_HeadComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsActive,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_bIsChasingPlayer,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_TimeSinceLastSeen,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_DeactivationDelay,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_playerFOV,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_debug,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_SnapKillRange,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_173_Penut_Statics::NewProp_ReplicatedRotation,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ASCP_173_Penut_Statics::StaticCppClassTypeInfo = {
@@ -200,9 +262,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_173_Penut() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_173_Penut_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ASCP_173_Penut, ASCP_173_Penut::StaticClass, TEXT("ASCP_173_Penut"), &Z_Registration_Info_UClass_ASCP_173_Penut, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_173_Penut), 3459010628U) },
+		{ Z_Construct_UClass_ASCP_173_Penut, ASCP_173_Penut::StaticClass, TEXT("ASCP_173_Penut"), &Z_Registration_Info_UClass_ASCP_173_Penut, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_173_Penut), 2174578937U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_173_Penut_h_1474943109(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_173_Penut_h_3465936178(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_173_Penut_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_173_Penut_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);
