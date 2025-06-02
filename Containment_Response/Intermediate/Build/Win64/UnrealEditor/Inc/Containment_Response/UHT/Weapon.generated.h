@@ -28,18 +28,41 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<struct FAttachme
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_RPC_WRAPPERS_NO_PURE_DECLS \
  \
-	DECLARE_FUNCTION(execFireGun); \
-	DECLARE_FUNCTION(execEquipAttachment);
+	DECLARE_FUNCTION(execServerEquipAttachment); \
+	DECLARE_FUNCTION(execEquipAttachment); \
+	DECLARE_FUNCTION(execOnRep_ExtraMesh); \
+	DECLARE_FUNCTION(execOnRep_StockMesh); \
+	DECLARE_FUNCTION(execOnRep_MagMesh); \
+	DECLARE_FUNCTION(execOnRep_BackGripMesh); \
+	DECLARE_FUNCTION(execOnRep_FrontGripMesh); \
+	DECLARE_FUNCTION(execOnRep_MuzzleMesh); \
+	DECLARE_FUNCTION(execOnRep_ScopeMesh); \
+	DECLARE_FUNCTION(execOnRep_WeaponMesh); \
+	DECLARE_FUNCTION(execFireGun);
 
 
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_ACCESSORS
+#define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_CALLBACK_WRAPPERS
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAWeapon(); \
 	friend struct Z_Construct_UClass_AWeapon_Statics; \
 public: \
 	DECLARE_CLASS(AWeapon, AActor, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Containment_Response"), NO_API) \
-	DECLARE_SERIALIZER(AWeapon)
+	DECLARE_SERIALIZER(AWeapon) \
+	enum class ENetFields_Private : uint16 \
+	{ \
+		NETFIELD_REP_START=(uint16)((int32)Super::ENetFields_Private::NETFIELD_REP_END + (int32)1), \
+		Rep_WeaponMesh=NETFIELD_REP_START, \
+		Rep_ScopeMesh, \
+		Rep_MuzzleMesh, \
+		Rep_FrontGripMesh, \
+		Rep_BackGripMesh, \
+		Rep_MagMesh, \
+		Rep_StockMesh, \
+		Rep_ExtraMesh, \
+		NETFIELD_REP_END=Rep_ExtraMesh	}; \
+	NO_API virtual void ValidateGeneratedRepEnums(const TArray<struct FRepRecord>& ClassReps) const override;
 
 
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_ENHANCED_CONSTRUCTORS \
@@ -63,6 +86,7 @@ public: \
 	FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_EDITOR_ONLY_SPARSE_DATA_PROPERTY_ACCESSORS \
 	FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_RPC_WRAPPERS_NO_PURE_DECLS \
 	FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_ACCESSORS \
+	FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_CALLBACK_WRAPPERS \
 	FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_INCLASS_NO_PURE_DECLS \
 	FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Weapon_h_41_ENHANCED_CONSTRUCTORS \
 private: \

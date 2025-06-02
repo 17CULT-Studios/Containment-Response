@@ -80,8 +80,6 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	WeaponChildComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("DefaultWeapon"));
 	WeaponChildComponent->SetupAttachment(RootComponent);
 	WeaponChildComponent->SetChildActorClass(AWeapon::StaticClass());
-	WeaponChildComponent->SetRelativeLocation(FVector(45.0f, 10.0f, 45.0f));
-	WeaponChildComponent->SetRelativeRotation(FRotator(0.0f, 90.0f, 90.0f));
 }
 
 void AContainment_ResponseCharacter::SetPlayerName(const FString& NewName)
@@ -100,7 +98,7 @@ void AContainment_ResponseCharacter::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
-
+	bHasRifle = true;
 	// Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
@@ -108,6 +106,15 @@ void AContainment_ResponseCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+	}
+
+	if (WeaponChildComponent && WeaponChildComponent->GetChildActor())
+	{
+		WeaponChildComponent->GetChildActor()->SetOwner(this);
+		//WeaponChildComponent->GetChildActor()->AttachToComponent(Mesh3P, FAttachmentTransformRules::SnapToTargetNotIncludingScale, TEXT("RightHand_Socket"));
+		WeaponChildComponent->GetChildActor()->AttachToComponent(Mesh1P, FAttachmentTransformRules::SnapToTargetNotIncludingScale, TEXT("GripPoint"));
+		WeaponChildComponent->GetChildActor()->SetActorRelativeRotation(FRotator(180.f, 0.f, -90.f));
+		WeaponChildComponent->GetChildActor()->SetActorRelativeLocation(FVector(4.f, 20.f, 10.f));
 	}
 
 	TArray<AActor*> AttachedActors;
@@ -127,16 +134,6 @@ void AContainment_ResponseCharacter::Tick(float DeltaTime)
 			FRotator LookAtRot = FRotationMatrix::MakeFromX(CamLoc - NameTagText->GetComponentLocation()).Rotator();
 			NameTagText->SetWorldRotation(LookAtRot);
 		}
-	}
-
-	if (WeaponChildComponent && FirstPersonCameraComponent)//tilts the weapon
-	{
-		FRotator CameraRot = FirstPersonCameraComponent->GetComponentRotation();
-
-		FRotator NewMeshRot = WeaponChildComponent->GetRelativeRotation();
-		NewMeshRot.Roll = CameraRot.Pitch + 90;
-
-		WeaponChildComponent->SetRelativeRotation(NewMeshRot);
 	}
 }
 

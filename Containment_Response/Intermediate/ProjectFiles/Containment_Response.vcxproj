@@ -582,18 +582,6 @@
       <AdditionalOptions>$(ClCompile_AdditionalOptions_1)</AdditionalOptions>
     </ClCompile>
     <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit_AIController.h"/>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_096_AIController.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_2)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_2)</ForcedIncludeFiles>
-      <AdditionalOptions>$(ClCompile_AdditionalOptions_1)</AdditionalOptions>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_096_AIController.h"/>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_096_ShyGuy.cpp">
-      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_2)</AdditionalIncludeDirectories>
-      <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_2)</ForcedIncludeFiles>
-      <AdditionalOptions>$(ClCompile_AdditionalOptions_1)</AdditionalOptions>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_096_ShyGuy.h"/>
     <ClCompile Include="..\..\Source\Containment_Response\SCP_173_AIController.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories_2)</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(ClCompile_ForcedIncludeFiles_2)</ForcedIncludeFiles>
