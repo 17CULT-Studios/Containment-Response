@@ -9,20 +9,20 @@
 ASCP_Base::ASCP_Base()
 {
 	PrimaryActorTick.bCanEverTick = false;
-
+	
 	bReplicates = true;
-
+	
 	CollisionCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionCapsule"));
 	CollisionCapsule->InitCapsuleSize(42.f, 96.f);
 	CollisionCapsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	RootComponent = CollisionCapsule;
-
+	
 	SCPMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SCPMesh"));
 	SCPMesh->SetupAttachment(RootComponent);
-
+	
 	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
 	MovementComponent->UpdatedComponent = RootComponent;
-
+	
 	HeadComponent = CreateDefaultSubobject<USceneComponent>(TEXT("HeadComponent"));
 	HeadComponent->SetupAttachment(RootComponent);
 	HeadComponent->SetRelativeLocation(FVector(0.f, 0.f, 80.f));

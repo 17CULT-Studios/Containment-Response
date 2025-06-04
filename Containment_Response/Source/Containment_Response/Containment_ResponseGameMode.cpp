@@ -20,27 +20,27 @@ void AContainment_ResponseGameMode::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
 
-	if (!NewPlayer) return;
-
-	APlayerState* PS = NewPlayer->PlayerState;
-	if (!PS) return;
-
-	IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get();
-	if (!OnlineSub) return;
-
-	IOnlineIdentityPtr Identity = OnlineSub->GetIdentityInterface();
-	if (!Identity.IsValid()) return;
-
-	TSharedPtr<const FUniqueNetId> UserId = PS->GetUniqueId().GetUniqueNetId();
-
-	if (UserId.IsValid())
-	{
-		FString SteamName = Identity->GetPlayerNickname(*UserId);
-		PS->SetPlayerName(SteamName);
-		UE_LOG(LogTemp, Log, TEXT("Player joined with Steam name: %s"), *SteamName);
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Failed to get Steam ID from player!"));
-	}
+	//if (!NewPlayer) return;
+	//
+	//APlayerState* PS = NewPlayer->PlayerState;
+	//if (!PS) return;
+	//
+	//IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get();
+	//if (!OnlineSub) return;
+	//
+	//IOnlineIdentityPtr Identity = OnlineSub->GetIdentityInterface();
+	//if (!Identity.IsValid()) return;
+	//
+	//TSharedPtr<const FUniqueNetId> UserId = PS->GetUniqueId().GetUniqueNetId();
+	//
+	//if (UserId.IsValid())
+	//{
+	//	FString SteamName = Identity->GetPlayerNickname(*UserId);
+	//	PS->SetPlayerName(SteamName);
+	//	UE_LOG(LogTemp, Log, TEXT("Player joined with Steam name: %s"), *SteamName);
+	//}
+	//else
+	//{
+	//	UE_LOG(LogTemp, Warning, TEXT("Failed to get Steam ID from player!"));
+	//}
 }

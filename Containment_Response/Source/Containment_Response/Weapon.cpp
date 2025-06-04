@@ -12,19 +12,19 @@ AWeapon::AWeapon()
 	PrimaryActorTick.bCanEverTick = false;
 	bReplicates = true;
 	SetReplicateMovement(true);
-
+	
 	WeaponMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("WeaponMesh"));
 	RootComponent = WeaponMesh;
-
+	
 	static ConstructorHelpers::FObjectFinder<UStaticMesh> DummyMesh(TEXT("/Game/Meshes/Weapon/Primary/StartingPrimary"));
-
+	
 	if (DummyMesh.Succeeded())
 	{
 		WeaponMesh->SetStaticMesh(DummyMesh.Object);
 		WeaponMesh->SetWorldScale3D(FVector(20.0f, 20.0f, 20.0f));
 		WeaponMesh->SetWorldRotation(FRotator(0.0f, 0.0f, 90.0f));
 	}
-
+	
 	AttachmentSlots.Add(EAttachmentSlot::Scope, FAttachmentSlot{ EAttachmentSlot::Scope });
 	AttachmentSlots.Add(EAttachmentSlot::Muzzle, FAttachmentSlot{ EAttachmentSlot::Muzzle });
 	AttachmentSlots.Add(EAttachmentSlot::Front_Grip, FAttachmentSlot{ EAttachmentSlot::Front_Grip });
@@ -32,9 +32,9 @@ AWeapon::AWeapon()
 	AttachmentSlots.Add(EAttachmentSlot::Magazine, FAttachmentSlot{ EAttachmentSlot::Magazine });
 	AttachmentSlots.Add(EAttachmentSlot::Stock, FAttachmentSlot{ EAttachmentSlot::Stock });
 	AttachmentSlots.Add(EAttachmentSlot::Extra, FAttachmentSlot{ EAttachmentSlot::Extra });
-
+	
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
+	
 	ScopeMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ScopeMesh"));
 	ScopeMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	ScopeMesh->SetupAttachment(RootComponent);

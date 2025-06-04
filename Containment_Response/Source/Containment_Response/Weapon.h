@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Weapon.generated.h"
+#include "Weapon.generated.h"//boo
 
 
 class USkeletalMeshComponent;

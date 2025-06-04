@@ -20,6 +20,13 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputMappingContext_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
 // End Cross Module References
+	DEFINE_FUNCTION(AContainment_ResponseCharacter::execGetHP)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		*(float*)Z_Param__Result=P_THIS->GetHP();
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AContainment_ResponseCharacter::execGetAtTable)
 	{
 		P_FINISH;
@@ -63,6 +70,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FNameNativePtrPair Funcs[] = {
 			{ "GetAtTable", &AContainment_ResponseCharacter::execGetAtTable },
 			{ "GetHasRifle", &AContainment_ResponseCharacter::execGetHasRifle },
+			{ "GetHP", &AContainment_ResponseCharacter::execGetHP },
 			{ "OnRep_PlayerName", &AContainment_ResponseCharacter::execOnRep_PlayerName },
 			{ "SetAtTable", &AContainment_ResponseCharacter::execSetAtTable },
 			{ "SetHasRifle", &AContainment_ResponseCharacter::execSetHasRifle },
@@ -152,6 +160,41 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_GetHasRifle_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics
+	{
+		struct Containment_ResponseCharacter_eventGetHP_Parms
+		{
+			float ReturnValue;
+		};
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_ReturnValue;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Containment_ResponseCharacter_eventGetHP_Parms, ReturnValue), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::NewProp_ReturnValue,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Player" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AContainment_ResponseCharacter, nullptr, "GetHP", nullptr, nullptr, Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::PropPointers), sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::Containment_ResponseCharacter_eventGetHP_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::Function_MetaDataParams), Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::Containment_ResponseCharacter_eventGetHP_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -341,6 +384,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	const FClassFunctionLinkInfo Z_Construct_UClass_AContainment_ResponseCharacter_Statics::FuncInfo[] = {
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable, "GetAtTable" }, // 3334811139
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHasRifle, "GetHasRifle" }, // 946526060
+		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP, "GetHP" }, // 1570044855
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName, "OnRep_PlayerName" }, // 3273537356
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable, "SetAtTable" }, // 3909255747
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetHasRifle, "SetHasRifle" }, // 3670791276
@@ -585,9 +629,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 2546548314U) },
+		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 3911215327U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_137353079(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_827392442(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

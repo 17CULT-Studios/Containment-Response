@@ -34,7 +34,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	FirstPersonCameraComponent->SetupAttachment(GetCapsuleComponent());
 	FirstPersonCameraComponent->SetRelativeLocation(FVector(-10.f, 0.f, 60.f)); // Position the camera
 	FirstPersonCameraComponent->bUsePawnControlRotation = true;
-
+	
 	// Create a mesh component that will be used when being viewed from a '1st person' view (when controlling this pawn)
 	Mesh1P = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("CharacterMesh1P"));
 	Mesh1P->SetOnlyOwnerSee(true);
@@ -42,7 +42,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	Mesh1P->bCastDynamicShadow = false;
 	Mesh1P->CastShadow = false;
 	Mesh1P->SetRelativeLocation(FVector(-30.f, 0.f, -150.f));
-
+	
 	//Steam Name Tag
 	NameTagText = CreateDefaultSubobject<UTextRenderComponent>(TEXT("NameTagText"));
 	NameTagText->SetupAttachment(RootComponent);
@@ -52,7 +52,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	NameTagText->SetTextRenderColor(FColor::White);
 	NameTagText->SetWorldSize(40.f);
 	NameTagText->SetText(FText::FromString("Player"));
-
+	
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshAsset(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny.SKM_Manny"));
 	static ConstructorHelpers::FClassFinder<UAnimInstance> Anim(TEXT("/Game/Characters/Mannequins/Animations/ABP_Manny"));
 	if (MeshAsset.Succeeded())
@@ -216,6 +216,11 @@ void AContainment_ResponseCharacter::SetAtTable(bool bNewAtTable)
 bool AContainment_ResponseCharacter::GetAtTable()
 {
 	return bAtTable;
+}
+
+float AContainment_ResponseCharacter::GetHP()
+{
+	return Health;
 }
 
 void AContainment_ResponseCharacter::Shoot()// if weapon exists shoot

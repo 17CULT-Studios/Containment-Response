@@ -99,7 +99,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Weapon)
 	bool GetAtTable();
 
+	UFUNCTION(BlueprintCallable, Category = Player)
+	float GetHP();
+
 	void Shoot();
+
+private:
+	//Data Members
+	float Health = 100.0f;
 
 protected:
 	/** Called for movement input */

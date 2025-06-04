@@ -41,7 +41,6 @@ ACRT_Unit::ACRT_Unit()
 
 	AIControllerClass = ACRT_Unit_AIController::StaticClass();
 	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
-
 }
 
 void ACRT_Unit::Tick(float DeltaTime)
