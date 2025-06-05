@@ -26,6 +26,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	bHasRifle = false;
 	bReplicates = true;
 	
+	
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(55.f, 96.0f);
 		
@@ -137,6 +138,20 @@ void AContainment_ResponseCharacter::Tick(float DeltaTime)
 	}
 }
 
+float AContainment_ResponseCharacter::TakeDamage(float DamageAmout, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	Super::TakeDamage(DamageAmout, DamageEvent, EventInstigator, DamageCauser);
+
+	Health -= DamageAmout;
+	if (Health <= 0.0f)
+	{
+		Health = 0.0f;
+		bKnockedOut = true;
+	}
+
+	return DamageAmout;
+}
+
 void AContainment_ResponseCharacter::OnRep_PlayerName()
 {
 	if (NameTagText)
@@ -231,4 +246,9 @@ void AContainment_ResponseCharacter::Shoot()// if weapon exists shoot
 	{
 		tempWeapon->FireGun();
 	}
+}
+
+bool AContainment_ResponseCharacter::IsKnockedOut()
+{
+	return bKnockedOut;
 }

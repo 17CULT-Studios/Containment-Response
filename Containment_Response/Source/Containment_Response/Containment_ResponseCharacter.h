@@ -61,6 +61,7 @@ public:
 protected:
 	virtual void BeginPlay();
 	virtual void Tick(float DeltaTime) override;
+	virtual float TakeDamage(float DamageAmout, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "NameTag")
 	class UTextRenderComponent* NameTagText; // overhead name that will be your steam name
@@ -104,9 +105,12 @@ public:
 
 	void Shoot();
 
+	bool IsKnockedOut();
+
 private:
 	//Data Members
 	float Health = 100.0f;
+	bool bKnockedOut = false;
 
 protected:
 	/** Called for movement input */

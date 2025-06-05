@@ -27,7 +27,7 @@ public:
 
     virtual void BeginPlay() override;
     virtual void Tick(float DeltaTime) override;
-
+    virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
     virtual void UseAbility() override;
 
     //----------------- Components -----------------
@@ -48,7 +48,7 @@ public:
     float playerFOV = 70.0f;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCP_173")
-    bool debug = true;
+    bool debug = 0;
 
     UPROPERTY(EditDefaultsOnly, Category = "SCP_173")
     float SnapKillRange = 200.0f;

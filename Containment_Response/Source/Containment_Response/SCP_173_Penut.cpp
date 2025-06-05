@@ -32,6 +32,7 @@ ASCP_173_Penut::ASCP_173_Penut()
     DeactivationDelay = 60.f;
     bIsActive = false;
     bIsChasingPlayer = false;
+    bIsImmortal = false;
 }
 
 void ASCP_173_Penut::BeginPlay()
@@ -46,6 +47,7 @@ void ASCP_173_Penut::BeginPlay()
             UE_LOG(LogTemp, Error, TEXT("SCP AIController is NULL! SCP will not move."));
         }
     }
+    SetCanBeDamaged(true);
 }
 
 void ASCP_173_Penut::Tick(float DeltaTime)
@@ -58,7 +60,7 @@ void ASCP_173_Penut::Tick(float DeltaTime)
     if (bIsActive)
     {
         bool bSeen = IsObserved();
-
+        UseAbility();
         if (debug)
         {
             UE_LOG(LogTemp, Warning, TEXT("Observed: %s"), bSeen ? TEXT("YES") : TEXT("NO"));
@@ -116,6 +118,19 @@ void ASCP_173_Penut::Tick(float DeltaTime)
         }
         LastLocation = CurrentLocation;
     }
+}
+
+float ASCP_173_Penut::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+    if (CurrentHealth <= 0.0f)
+    {
+        if (AIController)
+        {
+            AIController->StopMovement();
+            AIController->UnPossess();
+        }
+    }
+    return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 }
 
 void ASCP_173_Penut::UseAbility()

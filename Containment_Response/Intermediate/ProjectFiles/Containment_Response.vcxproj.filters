@@ -33,6 +33,12 @@
     <Filter Include="Source\Containment_Response">
       <UniqueIdentifier>{13B9125B-55B2-3B67-812E-90A2034891DB}</UniqueIdentifier>
     </Filter>
+    <ClCompile Include="..\..\Source\Containment_Response\AI_049_Controller.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\AI_049_Controller.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\AttachmentBase.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>
@@ -84,10 +90,10 @@
     <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit_AIController.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_096.cpp">
+    <ClCompile Include="..\..\Source\Containment_Response\SCP_049.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_096.h">
+    <ClInclude Include="..\..\Source\Containment_Response\SCP_049.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\SCP_173_AIController.cpp">

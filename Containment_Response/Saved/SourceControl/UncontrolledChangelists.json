@@ -6,7 +6,14 @@
 			"description": "Default Uncontrolled Changelist",
 			"files": [
 				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/UI/PlayerScreen/UI.uasset",
-				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/FirstPerson/Blueprints/BP_FirstPersonCharacter.uasset"
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/FirstPerson/Blueprints/BP_FirstPersonCharacter.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/__ExternalActors__/Levels/Lobby/E/17/RB2YU30ZHEICSNX5FA8OK6.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/Meshes/SCP/173/173.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/Meshes/SCP/049/049.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/__ExternalActors__/Levels/Lobby/D/CP/278CWA3WQLHQPJVI8FKLQY.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/Meshes/SCP/049/texture_0.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/Meshes/SCP/049/old_school_plege_doct_0605172545_texture.uasset",
+				"C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Content/Meshes/SCP/049/Material_001.uasset"
 			]
 		}
 	]

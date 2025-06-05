@@ -8,6 +8,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
 #include "Components/SceneComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "SCP_Base.generated.h"
 
 UCLASS()
@@ -19,7 +20,13 @@ public:
 	ASCP_Base();
 
 public:	
+	//---------- FUNCTIONS ----------
 	virtual void UseAbility();
+	virtual float TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+	void Kill();
+
+	UFUNCTION(BlueprintCallable, Category = "SCPFunctions")
+	void Heal(float value);
 	
 	//---------- IDENTIFACATION ----------
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
@@ -34,6 +41,8 @@ public:
 	float MaxHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
 	float CurrentHealth;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
+	bool bIsImmortal;
 
 	//---------- AWARENESS ----------
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
@@ -75,10 +84,4 @@ public:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
 	USceneComponent* HeadComponent;
-
-	//---------- FUNCTIONS ----------
-	UFUNCTION(BlueprintCallable, Category = "SCPFunctions")
-	void DoDamage(float value);
-	UFUNCTION(BlueprintCallable, Category = "SCPFunctions")
-	void Heal(float value);
 };

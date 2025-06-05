@@ -200,6 +200,15 @@ void AWeapon::FireGun()
 			TraceParams
 		);
 
+		if (bHit && HitResult.GetActor())
+		{
+			float DamageAmount = 9999.0f;
+			AActor* HitActor = HitResult.GetActor();
+			UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s (Class: %s)"),
+				*HitActor->GetName(), *HitActor->GetClass()->GetName());
+			UGameplayStatics::ApplyDamage(HitActor, DamageAmount, nullptr, this, nullptr);
+		}
+
 		FColor LineColor = bHit ? FColor::Red : FColor::Green;
 
 		DrawDebugLine(

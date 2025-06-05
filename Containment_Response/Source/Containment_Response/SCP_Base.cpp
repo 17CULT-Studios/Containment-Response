@@ -11,14 +11,18 @@ ASCP_Base::ASCP_Base()
 	PrimaryActorTick.bCanEverTick = false;
 	
 	bReplicates = true;
-	
+
 	CollisionCapsule = CreateDefaultSubobject<UCapsuleComponent>(TEXT("CollisionCapsule"));
 	CollisionCapsule->InitCapsuleSize(42.f, 96.f);
 	CollisionCapsule->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	CollisionCapsule->SetCollisionResponseToAllChannels(ECR_Block);
+	CollisionCapsule->SetCollisionObjectType(ECC_Pawn);
+	CollisionCapsule->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	RootComponent = CollisionCapsule;
 	
 	SCPMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SCPMesh"));
 	SCPMesh->SetupAttachment(RootComponent);
+	SCPMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	
 	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
 	MovementComponent->UpdatedComponent = RootComponent;
@@ -32,14 +36,22 @@ void ASCP_Base::UseAbility()
 {
 }
 
-void ASCP_Base::DoDamage(float value)
+float ASCP_Base::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
 {
-	CurrentHealth -= value;
+	float AppliedDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 
+	CurrentHealth -= DamageAmount;
 	if (CurrentHealth <= 0.0f)
 	{
-		CurrentHealth = 0.0f;
+		Kill();
 	}
+
+	return AppliedDamage;
+}
+
+void ASCP_Base::Kill()
+{
+	Destroy();
 }
 
 void ASCP_Base::Heal(float value)
