@@ -24,7 +24,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execSetAtTable); \
 	DECLARE_FUNCTION(execGetHasRifle); \
 	DECLARE_FUNCTION(execSetHasRifle); \
-	DECLARE_FUNCTION(execOnRep_PlayerName);
+	DECLARE_FUNCTION(execOnRep_PlayerName); \
+	DECLARE_FUNCTION(execInitializeSteamName);
 
 
 #define FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_23_ACCESSORS

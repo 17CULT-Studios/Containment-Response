@@ -52,6 +52,8 @@ public:
 	AContainment_ResponseCharacter();
 
 	void SetPlayerName(const FString& NewName); // gets steam name
+	UFUNCTION(BlueprintCallable, Category="Steam")
+	void InitializeSteamName();
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 

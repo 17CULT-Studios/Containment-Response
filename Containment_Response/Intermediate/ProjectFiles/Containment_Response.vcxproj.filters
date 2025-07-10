@@ -45,6 +45,12 @@
     <ClInclude Include="..\..\Source\Containment_Response\AttachmentBase.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\BTTask_FindWanderLocation.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\BTTask_FindWanderLocation.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
     <None Include="..\..\Source\Containment_Response\Containment_Response.Build.cs">
       <Filter>Source\Containment_Response</Filter>
     </None>

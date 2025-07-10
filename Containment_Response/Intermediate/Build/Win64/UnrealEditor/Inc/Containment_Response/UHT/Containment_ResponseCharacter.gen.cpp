@@ -64,6 +64,13 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		P_THIS->OnRep_PlayerName();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AContainment_ResponseCharacter::execInitializeSteamName)
+	{
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->InitializeSteamName();
+		P_NATIVE_END;
+	}
 	void AContainment_ResponseCharacter::StaticRegisterNativesAContainment_ResponseCharacter()
 	{
 		UClass* Class = AContainment_ResponseCharacter::StaticClass();
@@ -71,6 +78,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 			{ "GetAtTable", &AContainment_ResponseCharacter::execGetAtTable },
 			{ "GetHasRifle", &AContainment_ResponseCharacter::execGetHasRifle },
 			{ "GetHP", &AContainment_ResponseCharacter::execGetHP },
+			{ "InitializeSteamName", &AContainment_ResponseCharacter::execInitializeSteamName },
 			{ "OnRep_PlayerName", &AContainment_ResponseCharacter::execOnRep_PlayerName },
 			{ "SetAtTable", &AContainment_ResponseCharacter::execSetAtTable },
 			{ "SetHasRifle", &AContainment_ResponseCharacter::execSetHasRifle },
@@ -195,6 +203,35 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName_Statics
+	{
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName_Statics::Function_MetaDataParams[] = {
+		{ "Category", "Steam" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "// gets steam name\n" },
+#endif
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "gets steam name" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AContainment_ResponseCharacter, nullptr, "InitializeSteamName", nullptr, nullptr, nullptr, 0, 0, RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName_Statics::Function_MetaDataParams), Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName_Statics::Function_MetaDataParams) };
+	UFunction* Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -385,6 +422,7 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetAtTable, "GetAtTable" }, // 3334811139
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHasRifle, "GetHasRifle" }, // 946526060
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP, "GetHP" }, // 1570044855
+		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName, "InitializeSteamName" }, // 2462561837
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName, "OnRep_PlayerName" }, // 3273537356
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable, "SetAtTable" }, // 3909255747
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetHasRifle, "SetHasRifle" }, // 3670791276
@@ -629,9 +667,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 3911215327U) },
+		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 376620466U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_827392442(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_1249605177(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

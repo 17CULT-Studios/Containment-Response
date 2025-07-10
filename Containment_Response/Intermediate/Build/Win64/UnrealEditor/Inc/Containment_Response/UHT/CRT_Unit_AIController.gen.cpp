@@ -10,6 +10,9 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeCRT_Unit_AIController() {}
 // Cross Module References
 	AIMODULE_API UClass* Z_Construct_UClass_AAIController();
+	AIMODULE_API UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
+	AIMODULE_API UClass* Z_Construct_UClass_UBehaviorTreeComponent_NoRegister();
+	AIMODULE_API UClass* Z_Construct_UClass_UBlackboardComponent_NoRegister();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ACRT_Unit_AIController();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ACRT_Unit_AIController_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
@@ -29,9 +32,17 @@ void EmptyLinkFunctionForGeneratedCodeCRT_Unit_AIController() {}
 		static const UECodeGen_Private::FMetaDataPairParam Class_MetaDataParams[];
 #endif
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_FollowDistance_MetaData[];
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_BlackboardComp_MetaData[];
 #endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_FollowDistance;
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_BlackboardComp;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_BehaviorComp_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_BehaviorComp;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_BehaviorTreeAsset_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_BehaviorTreeAsset;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsMoving_MetaData[];
 #endif
@@ -54,12 +65,34 @@ void EmptyLinkFunctionForGeneratedCodeCRT_Unit_AIController() {}
 	};
 #endif
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_FollowDistance_MetaData[] = {
-		{ "Category", "CRT_Unit_AIController" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BlackboardComp_MetaData[] = {
+		{ "Category", "AI" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//Blackboard and behavior tree\n" },
+#endif
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "CRT_Unit_AIController.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Blackboard and behavior tree" },
+#endif
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BlackboardComp = { "BlackboardComp", nullptr, (EPropertyFlags)0x00200800000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ACRT_Unit_AIController, BlackboardComp), Z_Construct_UClass_UBlackboardComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BlackboardComp_MetaData), Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BlackboardComp_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorComp_MetaData[] = {
+		{ "Category", "AI" },
+		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "CRT_Unit_AIController.h" },
 	};
 #endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_FollowDistance = { "FollowDistance", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ACRT_Unit_AIController, FollowDistance), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_FollowDistance_MetaData), Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_FollowDistance_MetaData) };
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorComp = { "BehaviorComp", nullptr, (EPropertyFlags)0x00200800000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ACRT_Unit_AIController, BehaviorComp), Z_Construct_UClass_UBehaviorTreeComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorComp_MetaData), Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorComp_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorTreeAsset_MetaData[] = {
+		{ "Category", "AI" },
+		{ "ModuleRelativePath", "CRT_Unit_AIController.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorTreeAsset = { "BehaviorTreeAsset", nullptr, (EPropertyFlags)0x0010000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ACRT_Unit_AIController, BehaviorTreeAsset), Z_Construct_UClass_UBehaviorTree_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorTreeAsset_MetaData), Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorTreeAsset_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_bIsMoving_MetaData[] = {
 		{ "Category", "CRT_Unit_AIController" },
@@ -72,7 +105,9 @@ void EmptyLinkFunctionForGeneratedCodeCRT_Unit_AIController() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_bIsMoving = { "bIsMoving", nullptr, (EPropertyFlags)0x0010000000000014, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ACRT_Unit_AIController), &Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_bIsMoving_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_bIsMoving_MetaData), Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_bIsMoving_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ACRT_Unit_AIController_Statics::PropPointers[] = {
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_FollowDistance,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BlackboardComp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorComp,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_BehaviorTreeAsset,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ACRT_Unit_AIController_Statics::NewProp_bIsMoving,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ACRT_Unit_AIController_Statics::StaticCppClassTypeInfo = {
@@ -106,7 +141,6 @@ void EmptyLinkFunctionForGeneratedCodeCRT_Unit_AIController() {}
 	{
 		return ACRT_Unit_AIController::StaticClass();
 	}
-	ACRT_Unit_AIController::ACRT_Unit_AIController(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {}
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ACRT_Unit_AIController);
 	ACRT_Unit_AIController::~ACRT_Unit_AIController() {}
 	struct Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_CRT_Unit_AIController_h_Statics
@@ -114,9 +148,9 @@ void EmptyLinkFunctionForGeneratedCodeCRT_Unit_AIController() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_CRT_Unit_AIController_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ACRT_Unit_AIController, ACRT_Unit_AIController::StaticClass, TEXT("ACRT_Unit_AIController"), &Z_Registration_Info_UClass_ACRT_Unit_AIController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ACRT_Unit_AIController), 1721997939U) },
+		{ Z_Construct_UClass_ACRT_Unit_AIController, ACRT_Unit_AIController::StaticClass, TEXT("ACRT_Unit_AIController"), &Z_Registration_Info_UClass_ACRT_Unit_AIController, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ACRT_Unit_AIController), 664633953U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_CRT_Unit_AIController_h_1364315685(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_CRT_Unit_AIController_h_1665138494(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_CRT_Unit_AIController_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_CRT_Unit_AIController_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

@@ -14,6 +14,9 @@
 #include "Net/UnrealNetwork.h"
 #include "OnlineSubsystem.h"
 #include "Interfaces/OnlineIdentityInterface.h"
+#include "GameFramework/PlayerController.h"
+#include "GameFramework/PlayerState.h"
+
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -52,7 +55,7 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	NameTagText->SetVerticalAlignment(EVRTA_TextCenter);
 	NameTagText->SetTextRenderColor(FColor::White);
 	NameTagText->SetWorldSize(40.f);
-	NameTagText->SetText(FText::FromString("Player"));
+	NameTagText->SetText(FText::FromString("Error"));
 	
 	static ConstructorHelpers::FObjectFinder<USkeletalMesh> MeshAsset(TEXT("/Game/Characters/Mannequins/Meshes/SKM_Manny.SKM_Manny"));
 	static ConstructorHelpers::FClassFinder<UAnimInstance> Anim(TEXT("/Game/Characters/Mannequins/Animations/ABP_Manny"));
@@ -89,6 +92,27 @@ void AContainment_ResponseCharacter::SetPlayerName(const FString& NewName)
 	OnRep_PlayerName();
 }
 
+void AContainment_ResponseCharacter::InitializeSteamName()//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+{
+	if (HasAuthority())
+	{
+		APlayerController* PC = Cast<APlayerController>(GetController());
+		if (PC && PC->PlayerState && PC->PlayerState->GetUniqueId().IsValid())
+		{
+			IOnlineSubsystem* OnlineSub = IOnlineSubsystem::Get();
+			if (OnlineSub)
+			{
+				IOnlineIdentityPtr Identity = OnlineSub->GetIdentityInterface();
+				if (Identity.IsValid())
+				{
+					FString SteamName = Identity->GetPlayerNickname(*PC->PlayerState->GetUniqueId());
+					SetPlayerName(SteamName);
+				}
+			}
+		}
+	}
+}
+
 void AContainment_ResponseCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
@@ -100,6 +124,12 @@ void AContainment_ResponseCharacter::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 	bHasRifle = true;
+
+	if (HasAuthority())
+	{
+		InitializeSteamName();
+	}
+
 	// Add Input Mapping Context
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
