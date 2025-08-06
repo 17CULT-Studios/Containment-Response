@@ -5,7 +5,6 @@
 			"AI_049_Controller.gen.cpp.obj",
 			"AttachmentBase.gen.cpp.obj",
 			"BTTask_FindWanderLocation.gen.cpp.obj",
-			"Containment_Response.init.gen.cpp.obj",
 			"Containment_ResponseCharacter.gen.cpp.obj",
 			"Containment_ResponseGameMode.gen.cpp.obj",
 			"Containment_ResponsePlayerController.gen.cpp.obj",
@@ -35,7 +34,10 @@
 			"SCP_Base.cpp.obj",
 			"TP_PickUpComponent.cpp.obj",
 			"TP_WeaponComponent.cpp.obj",
-			"Weapon.cpp.obj"
+			"Weapon.cpp.obj",
+			"Containment_Response.init.gen.cpp.obj",
+			"SCP_939.gen.cpp.obj",
+			"SCP_939.cpp.obj"
 		]
 	}
 }
