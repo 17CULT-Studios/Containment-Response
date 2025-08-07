@@ -2,11 +2,19 @@
 
 
 #include "SCP_939.h"
+#include "Perception/PawnSensingComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "AIController.h"
+#include "Containment_ResponseCharacter.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Components/MeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 ASCP_939::ASCP_939()
 {
 	PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComponent"));
 	PawnSensingComponent->SetPeripheralVisionAngle(90.0f);
+	PawnSensingComponent->SightRadius = 1000.0f;
 	PawnSensingComponent->SensingInterval = 0.5f;
 
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("AI_SkeletalMesh"));
@@ -14,6 +22,16 @@ ASCP_939::ASCP_939()
 
 	SkeletalMesh->SetRelativeLocation(FVector(0.f, 0.f, -90.f));
 	SkeletalMesh->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));
+
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
+
+	GetCharacterMovement()->JumpZVelocity = 700.0f;
+	GetCharacterMovement()->AirControl = 0.35f;
+	GetCharacterMovement()->MaxWalkSpeed = 550.0f;
+	GetCharacterMovement()->MinAnalogWalkSpeed = 40.0f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
+	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 }
 
 
@@ -35,8 +53,16 @@ void ASCP_939::OnSeePawn(APawn* OtherPawn)
 		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Pawn sensed: %s"), *OtherPawn->GetName()));
 	}
 	
-
-	//here is where you will tell the enemy to move
+	AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
+	if (player && player->IsPlayerControlled())
+	{
+		AAIController* ai = Cast<AAIController>(GetController());
+		if (ai)
+		{
+			ai->MoveToLocation(player->GetActorLocation());
+		}
+	}
+	
 }
 
 void ASCP_939::OnHearNoise(APawn* OtherPawn, const FVector& Loctaion, float Volume)
@@ -44,6 +70,16 @@ void ASCP_939::OnHearNoise(APawn* OtherPawn, const FVector& Loctaion, float Volu
 	if (GEngine)
 	{
 		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Pawn Hear Noise: %s"), *OtherPawn->GetName()));
+	}
+
+	AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
+	if (player && player->IsPlayerControlled())
+	{
+		AAIController* ai = Cast<AAIController>(GetController());
+		if (ai)
+		{
+			ai->MoveToLocation(player->GetActorLocation());
+		}
 	}
 }
 
