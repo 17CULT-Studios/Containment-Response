@@ -30,6 +30,7 @@
 #include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/SCP_049.cpp"
 #include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/SCP_173_AIController.cpp"
 #include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/SCP_173_Penut.cpp"
+#include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/SCP_939.cpp"
 #include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/SCP_Base.cpp"
 #include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/TP_PickUpComponent.cpp"
 #include "C:/Users/smit2129/Desktop/Containment-Response/Containment_Response/Source/Containment_Response/TP_WeaponComponent.cpp"
