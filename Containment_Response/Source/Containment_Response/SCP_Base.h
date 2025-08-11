@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
@@ -12,7 +12,7 @@
 #include "SCP_Base.generated.h"
 
 UCLASS()
-class CONTAINMENT_RESPONSE_API ASCP_Base : public APawn
+class CONTAINMENT_RESPONSE_API ASCP_Base : public ACharacter
 {
 	GENERATED_BODY()
 	

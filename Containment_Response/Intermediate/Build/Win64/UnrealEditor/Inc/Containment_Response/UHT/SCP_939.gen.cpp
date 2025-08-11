@@ -12,8 +12,8 @@ void EmptyLinkFunctionForGeneratedCodeSCP_939() {}
 	AIMODULE_API UClass* Z_Construct_UClass_UPawnSensingComponent_NoRegister();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_939();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_939_NoRegister();
+	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_ASCP_Base();
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
-	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
@@ -154,7 +154,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_939() {}
 		static const UECodeGen_Private::FClassParams ClassParams;
 	};
 	UObject* (*const Z_Construct_UClass_ASCP_939_Statics::DependentSingletons[])() = {
-		(UObject* (*)())Z_Construct_UClass_ACharacter,
+		(UObject* (*)())Z_Construct_UClass_ASCP_Base,
 		(UObject* (*)())Z_Construct_UPackage__Script_Containment_Response,
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_939_Statics::DependentSingletons) < 16);
@@ -229,9 +229,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_939() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_939_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ASCP_939, ASCP_939::StaticClass, TEXT("ASCP_939"), &Z_Registration_Info_UClass_ASCP_939, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_939), 3234656711U) },
+		{ Z_Construct_UClass_ASCP_939, ASCP_939::StaticClass, TEXT("ASCP_939"), &Z_Registration_Info_UClass_ASCP_939, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_939), 543245532U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_939_h_505616018(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_939_h_2062341345(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_939_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_939_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

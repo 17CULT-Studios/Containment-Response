@@ -28,7 +28,7 @@ private: \
 	static void StaticRegisterNativesASCP_Base(); \
 	friend struct Z_Construct_UClass_ASCP_Base_Statics; \
 public: \
-	DECLARE_CLASS(ASCP_Base, APawn, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Containment_Response"), NO_API) \
+	DECLARE_CLASS(ASCP_Base, ACharacter, COMPILED_IN_FLAGS(0 | CLASS_Config), CASTCLASS_None, TEXT("/Script/Containment_Response"), NO_API) \
 	DECLARE_SERIALIZER(ASCP_Base)
 
 

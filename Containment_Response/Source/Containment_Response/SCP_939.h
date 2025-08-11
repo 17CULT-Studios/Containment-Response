@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "SCP_Base.h"
 #include "GameFramework/Character.h"
 #include "Perception/PawnSensingComponent.h"
 #include "SCP_939.generated.h"
 
 UCLASS()
-class CONTAINMENT_RESPONSE_API ASCP_939 : public ACharacter
+class CONTAINMENT_RESPONSE_API ASCP_939 : public ASCP_Base
 {
 	GENERATED_BODY()
 

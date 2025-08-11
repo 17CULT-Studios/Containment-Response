@@ -33,11 +33,11 @@
 			"SCP_049.cpp.obj",
 			"SCP_173_AIController.cpp.obj",
 			"SCP_173_Penut.cpp.obj",
-			"SCP_Base.cpp.obj",
 			"TP_PickUpComponent.cpp.obj",
 			"TP_WeaponComponent.cpp.obj",
 			"Weapon.cpp.obj",
-			"SCP_939.cpp.obj"
+			"SCP_939.cpp.obj",
+			"SCP_Base.cpp.obj"
 		]
 	}
 }

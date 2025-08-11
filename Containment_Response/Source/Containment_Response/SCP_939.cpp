@@ -32,6 +32,8 @@ ASCP_939::ASCP_939()
 	GetCharacterMovement()->MinAnalogWalkSpeed = 40.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
+
+	Tags.Add("Enemy");
 }
 
 
