@@ -38,63 +38,23 @@ ACRT_Unit::ACRT_Unit()
 
 	MovementComponent = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("MovementComponent"));
 	MovementComponent->UpdatedComponent = RootComponent;
-
-	AIControllerClass = ACRT_Unit_AIController::StaticClass();
-	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 void ACRT_Unit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	UpdateAnimShouldMove();
 	DTime = DeltaTime;
-}
-
-void ACRT_Unit::UpdateAnimShouldMove()
-{
-	if (!CRTMesh || !CRTController) return;
-
-	//Get the AnimInstance at runtime
-	UAnimInstance* AnimInstance = CRTMesh->GetAnimInstance();
-	if (!AnimInstance) return;
-
-	// The name of the bool variable in the Anim Blueprint
-	static FName BoolName = TEXT("ShouldMove");
-
-	// Use Unreal's property system to find the variable
-	FBoolProperty* BoolProp = FindFProperty<FBoolProperty>(AnimInstance->GetClass(), BoolName);
-
-	if (BoolProp)
-	{
-		BoolProp->SetPropertyValue_InContainer(AnimInstance, CRTController->bIsMoving);
-	}
-
-	//if (IsMoving());
-	//{
-	//	FVector CurrentLocation = GetActorLocation();
-	//	SimulatedVelocity = (CurrentLocation - LastLocation) / DTime;
-	//	LastLocation = CurrentLocation;
-	//}
-	FVector CurrentLocation = GetActorLocation();
-	SimulatedVelocity = (CurrentLocation - LastLocation) / DTime;
-	LastLocation = CurrentLocation;
 }
 
 void ACRT_Unit::BeginPlay()
 {
 	Super::BeginPlay();
 	LastLocation = GetActorLocation();
-	CRTController = Cast<ACRT_Unit_AIController>(GetController());
 }
 
 UPawnMovementComponent* ACRT_Unit::GetMovementComponent() const
 {
 	return MovementComponent;
-}
-
-bool ACRT_Unit::IsMoving() const
-{
-	return CRTController && CRTController->bIsMoving;
 }
 
 

@@ -4,19 +4,12 @@
 #include "SCP_939.h"
 #include "Perception/PawnSensingComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "AIController.h"
-#include "Containment_ResponseCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/MeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 ASCP_939::ASCP_939()
 {
-	PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComponent"));
-	PawnSensingComponent->SetPeripheralVisionAngle(90.0f);
-	PawnSensingComponent->SightRadius = 1000.0f;
-	PawnSensingComponent->SensingInterval = 0.5f;
-
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("AI_SkeletalMesh"));
 	SkeletalMesh->SetupAttachment(GetMesh());
 
@@ -32,57 +25,10 @@ ASCP_939::ASCP_939()
 	GetCharacterMovement()->MinAnalogWalkSpeed = 40.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 	GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
-
-	Tags.Add("Enemy");
 }
 
 
 void ASCP_939::BeginPlay()
 {
 	Super::BeginPlay();	
-
-	if (PawnSensingComponent)
-	{
-		PawnSensingComponent->OnSeePawn.AddDynamic(this, &ASCP_939::OnSeePawn);
-		PawnSensingComponent->OnHearNoise.AddDynamic(this, &ASCP_939::OnHearNoise);
-	}
 }
-
-void ASCP_939::OnSeePawn(APawn* OtherPawn)
-{
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Pawn sensed: %s"), *OtherPawn->GetName()));
-	}
-	
-	AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
-	if (player && player->IsPlayerControlled())
-	{
-		AAIController* ai = Cast<AAIController>(GetController());
-		if (ai)
-		{
-			ai->MoveToLocation(player->GetActorLocation());
-		}
-	}
-	
-}
-
-void ASCP_939::OnHearNoise(APawn* OtherPawn, const FVector& Loctaion, float Volume)
-{
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Pawn Hear Noise: %s"), *OtherPawn->GetName()));
-	}
-
-	AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
-	if (player && player->IsPlayerControlled())
-	{
-		AAIController* ai = Cast<AAIController>(GetController());
-		if (ai)
-		{
-			ai->MoveToLocation(player->GetActorLocation());
-		}
-	}
-}
-
-

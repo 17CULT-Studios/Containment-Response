@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "Weapon.h"
+#include "Perception/PawnSensingComponent.h"
 #include "Containment_ResponseCharacter.generated.h"
 
 class UInputComponent;
@@ -47,6 +48,15 @@ class AContainment_ResponseCharacter : public ACharacter
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ShootAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ScrollAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* PrimaryWeaponAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* SecondaryWeaponAction;
 	
 public:
 	AContainment_ResponseCharacter();
@@ -59,6 +69,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Weapon")//Primary Weapon
 	UChildActorComponent* WeaponChildComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI", meta = (AllowPrivateAccess = "true"))
+	UPawnSensingComponent* PawnSensingComponent;
+
+	UFUNCTION()
+	void OnSeePawn(APawn* OtherPawn);
+
+	UFUNCTION()
+	void OnHearNoise(APawn* InstigatorPawn, const FVector& Loctaion, float Volume);
 
 protected:
 	virtual void BeginPlay();
@@ -106,11 +125,15 @@ public:
 	float GetHP();
 
 	void Shoot();
+	void PrimaryWeapon();
+	void SecondaryWeapon();
+	void Scroll();
 
 	bool IsKnockedOut();
 
 private:
 	//Data Members
+	int CurrentWeapon = 1;
 	float Health = 100.0f;
 	bool bKnockedOut = false;
 

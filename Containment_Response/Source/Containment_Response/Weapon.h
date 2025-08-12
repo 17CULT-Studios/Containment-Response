@@ -86,7 +86,7 @@ public:
 	TMap<EAttachmentSlot, FAttachmentSlot> AttachmentSlots;
 
 	UFUNCTION(BlueprintCallable, Category = "Fire")
-	void FireGun();
+	void FireGun(bool doDamage);
 
 	// Replication
 	UPROPERTY(ReplicatedUsing = OnRep_WeaponMesh)

@@ -6,7 +6,6 @@
 #include "GameFramework/Pawn.h"
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/FloatingPawnMovement.h"
-#include "CRT_Unit_AIController.h"
 #include "CRT_Unit.generated.h"
 
 UCLASS()
@@ -20,13 +19,10 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
-	void UpdateAnimShouldMove();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	ACRT_Unit_AIController* CRTController;
 
 public:	
 	UPROPERTY(VisibleAnywhere)
@@ -39,9 +35,6 @@ public:
 	UPawnMovementComponent* MovementComponent;
 
 	virtual UPawnMovementComponent* GetMovementComponent() const override;
-
-	UFUNCTION(BlueprintCallable, BlueprintPure)
-	bool IsMoving() const;
 
 	UFUNCTION(BlueprintCallable)
 	FVector GetSimulatedVelocity() const { return SimulatedVelocity; }//tryed to trick the animation did not word

@@ -9,9 +9,12 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 // Cross Module References
+	AIMODULE_API UClass* Z_Construct_UClass_UPawnSensingComponent_NoRegister();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_AContainment_ResponseCharacter();
 	CONTAINMENT_RESPONSE_API UClass* Z_Construct_UClass_AContainment_ResponseCharacter_NoRegister();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UCameraComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UChildActorComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
@@ -64,6 +67,24 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		P_THIS->OnRep_PlayerName();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AContainment_ResponseCharacter::execOnHearNoise)
+	{
+		P_GET_OBJECT(APawn,Z_Param_InstigatorPawn);
+		P_GET_STRUCT_REF(FVector,Z_Param_Out_Loctaion);
+		P_GET_PROPERTY(FFloatProperty,Z_Param_Volume);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnHearNoise(Z_Param_InstigatorPawn,Z_Param_Out_Loctaion,Z_Param_Volume);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(AContainment_ResponseCharacter::execOnSeePawn)
+	{
+		P_GET_OBJECT(APawn,Z_Param_OtherPawn);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnSeePawn(Z_Param_OtherPawn);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(AContainment_ResponseCharacter::execInitializeSteamName)
 	{
 		P_FINISH;
@@ -79,7 +100,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 			{ "GetHasRifle", &AContainment_ResponseCharacter::execGetHasRifle },
 			{ "GetHP", &AContainment_ResponseCharacter::execGetHP },
 			{ "InitializeSteamName", &AContainment_ResponseCharacter::execInitializeSteamName },
+			{ "OnHearNoise", &AContainment_ResponseCharacter::execOnHearNoise },
 			{ "OnRep_PlayerName", &AContainment_ResponseCharacter::execOnRep_PlayerName },
+			{ "OnSeePawn", &AContainment_ResponseCharacter::execOnSeePawn },
 			{ "SetAtTable", &AContainment_ResponseCharacter::execSetAtTable },
 			{ "SetHasRifle", &AContainment_ResponseCharacter::execSetHasRifle },
 		};
@@ -235,6 +258,56 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics
+	{
+		struct Containment_ResponseCharacter_eventOnHearNoise_Parms
+		{
+			APawn* InstigatorPawn;
+			FVector Loctaion;
+			float Volume;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_InstigatorPawn;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_Loctaion_MetaData[];
+#endif
+		static const UECodeGen_Private::FStructPropertyParams NewProp_Loctaion;
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_Volume;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_InstigatorPawn = { "InstigatorPawn", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Containment_ResponseCharacter_eventOnHearNoise_Parms, InstigatorPawn), Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(0, nullptr) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Loctaion_MetaData[] = {
+		{ "NativeConst", "" },
+	};
+#endif
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Loctaion = { "Loctaion", nullptr, (EPropertyFlags)0x0010000008000182, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Containment_ResponseCharacter_eventOnHearNoise_Parms, Loctaion), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Loctaion_MetaData), Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Loctaion_MetaData) };
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Volume = { "Volume", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Containment_ResponseCharacter_eventOnHearNoise_Parms, Volume), METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_InstigatorPawn,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Loctaion,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::NewProp_Volume,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AContainment_ResponseCharacter, nullptr, "OnHearNoise", nullptr, nullptr, Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::PropPointers), sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::Containment_ResponseCharacter_eventOnHearNoise_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00C20401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::Function_MetaDataParams), Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::Containment_ResponseCharacter_eventOnHearNoise_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName_Statics
 	{
 #if WITH_METADATA
@@ -254,6 +327,40 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics
+	{
+		struct Containment_ResponseCharacter_eventOnSeePawn_Parms
+		{
+			APawn* OtherPawn;
+		};
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_OtherPawn;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::NewProp_OtherPawn = { "OtherPawn", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(Containment_ResponseCharacter_eventOnSeePawn_Parms, OtherPawn), Z_Construct_UClass_APawn_NoRegister, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::NewProp_OtherPawn,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AContainment_ResponseCharacter, nullptr, "OnSeePawn", nullptr, nullptr, Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::PropPointers), sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::Containment_ResponseCharacter_eventOnSeePawn_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::Function_MetaDataParams), Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::Containment_ResponseCharacter_eventOnSeePawn_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -384,9 +491,25 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_ShootAction;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_ScrollAction_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_ScrollAction;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PrimaryWeaponAction_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PrimaryWeaponAction;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_SecondaryWeaponAction_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_SecondaryWeaponAction;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_WeaponChildComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponChildComponent;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_PawnSensingComponent_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_PawnSensingComponent;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_NameTagText_MetaData[];
 #endif
@@ -423,7 +546,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHasRifle, "GetHasRifle" }, // 946526060
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_GetHP, "GetHP" }, // 1570044855
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_InitializeSteamName, "InitializeSteamName" }, // 2462561837
+		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_OnHearNoise, "OnHearNoise" }, // 426583054
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_OnRep_PlayerName, "OnRep_PlayerName" }, // 3273537356
+		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_OnSeePawn, "OnSeePawn" }, // 3914820829
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetAtTable, "SetAtTable" }, // 3909255747
 		{ &Z_Construct_UFunction_AContainment_ResponseCharacter_SetHasRifle, "SetHasRifle" }, // 3670791276
 	};
@@ -523,6 +648,30 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ShootAction = { "ShootAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, ShootAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ShootAction_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ShootAction_MetaData) };
 #if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ScrollAction_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ScrollAction = { "ScrollAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, ScrollAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ScrollAction_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ScrollAction_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PrimaryWeaponAction_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PrimaryWeaponAction = { "PrimaryWeaponAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, PrimaryWeaponAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PrimaryWeaponAction_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PrimaryWeaponAction_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_SecondaryWeaponAction_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_SecondaryWeaponAction = { "SecondaryWeaponAction", nullptr, (EPropertyFlags)0x0040000000000015, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, SecondaryWeaponAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_SecondaryWeaponAction_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_SecondaryWeaponAction_MetaData) };
+#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData[] = {
 		{ "Category", "Weapon" },
 #if !UE_BUILD_SHIPPING
@@ -536,6 +685,15 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent = { "WeaponChildComponent", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, WeaponChildComponent), Z_Construct_UClass_UChildActorComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PawnSensingComponent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "AI" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Containment_ResponseCharacter.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PawnSensingComponent = { "PawnSensingComponent", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AContainment_ResponseCharacter, PawnSensingComponent), Z_Construct_UClass_UPawnSensingComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PawnSensingComponent_MetaData), Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PawnSensingComponent_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText_MetaData[] = {
 		{ "Category", "NameTag" },
@@ -612,7 +770,11 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_JumpAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_MoveAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ShootAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_ScrollAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PrimaryWeaponAction,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_SecondaryWeaponAction,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_WeaponChildComponent,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PawnSensingComponent,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_NameTagText,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_PlayerName,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AContainment_ResponseCharacter_Statics::NewProp_LookAction,
@@ -667,9 +829,9 @@ void EmptyLinkFunctionForGeneratedCodeContainment_ResponseCharacter() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 376620466U) },
+		{ Z_Construct_UClass_AContainment_ResponseCharacter, AContainment_ResponseCharacter::StaticClass, TEXT("AContainment_ResponseCharacter"), &Z_Registration_Info_UClass_AContainment_ResponseCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AContainment_ResponseCharacter), 4126481409U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_1249605177(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_2639526878(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_Containment_ResponseCharacter_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

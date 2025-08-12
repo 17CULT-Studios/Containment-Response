@@ -84,6 +84,11 @@ AContainment_ResponseCharacter::AContainment_ResponseCharacter()
 	WeaponChildComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("DefaultWeapon"));
 	WeaponChildComponent->SetupAttachment(RootComponent);
 	WeaponChildComponent->SetChildActorClass(AWeapon::StaticClass());
+
+	PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComponent"));
+	PawnSensingComponent->SetPeripheralVisionAngle(70);
+	PawnSensingComponent->SightRadius = 500;
+	PawnSensingComponent->SensingInterval = 0.5;
 }
 
 void AContainment_ResponseCharacter::SetPlayerName(const FString& NewName)
@@ -119,6 +124,15 @@ void AContainment_ResponseCharacter::GetLifetimeReplicatedProps(TArray<FLifetime
 	DOREPLIFETIME(AContainment_ResponseCharacter, PlayerName);
 }
 
+void AContainment_ResponseCharacter::OnSeePawn(APawn* OtherPawn)
+{
+	
+}
+
+void AContainment_ResponseCharacter::OnHearNoise(APawn* InstigatorPawn, const FVector& Loctaion, float Volume)
+{
+}
+
 void AContainment_ResponseCharacter::BeginPlay()
 {
 	// Call the base class  
@@ -150,6 +164,12 @@ void AContainment_ResponseCharacter::BeginPlay()
 
 	TArray<AActor*> AttachedActors;
 	GetAttachedActors(AttachedActors);
+
+	if (PawnSensingComponent)
+	{
+		PawnSensingComponent->OnSeePawn.AddDynamic(this, &AContainment_ResponseCharacter::OnSeePawn);
+		PawnSensingComponent->OnHearNoise.AddDynamic(this, &AContainment_ResponseCharacter::OnHearNoise);
+	}
 }
 
 void AContainment_ResponseCharacter::Tick(float DeltaTime)
@@ -209,6 +229,10 @@ void AContainment_ResponseCharacter::SetupPlayerInputComponent(UInputComponent* 
 
 		//Shooting
 		EnhancedInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, this, &AContainment_ResponseCharacter::Shoot);
+
+		EnhancedInputComponent->BindAction(PrimaryWeaponAction, ETriggerEvent::Triggered, this, &AContainment_ResponseCharacter::PrimaryWeapon);
+		EnhancedInputComponent->BindAction(SecondaryWeaponAction, ETriggerEvent::Triggered, this, &AContainment_ResponseCharacter::SecondaryWeapon);
+		EnhancedInputComponent->BindAction(ScrollAction, ETriggerEvent::Triggered, this, &AContainment_ResponseCharacter::Scroll);
 	}
 	else
 	{
@@ -274,7 +298,56 @@ void AContainment_ResponseCharacter::Shoot()// if weapon exists shoot
 
 	if (tempWeapon != nullptr)
 	{
-		tempWeapon->FireGun();
+		if (CurrentWeapon == 1)
+		{
+			tempWeapon->FireGun(true);
+		}
+		else
+		{
+			tempWeapon->FireGun(false);
+		}
+	}
+}
+
+void AContainment_ResponseCharacter::PrimaryWeapon()
+{
+	CurrentWeapon = 1;
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Gun")));
+	}
+}
+
+void AContainment_ResponseCharacter::SecondaryWeapon()
+{
+	CurrentWeapon = 2;
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Contain")));
+	}
+}
+
+void AContainment_ResponseCharacter::Scroll()
+{
+	switch (CurrentWeapon)
+	{
+	case 1:
+		CurrentWeapon = 2;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Contain")));
+		}
+		break;
+	case 2:
+		CurrentWeapon = 1;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Gun")));
+		}
+		break;
+	default:
+		CurrentWeapon = 1;
+		break;
 	}
 }
 

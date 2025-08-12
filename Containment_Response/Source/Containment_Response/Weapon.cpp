@@ -5,6 +5,7 @@
 #include "Net/UnrealNetwork.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "SCP_Base.h"
 #include "AttachmentBase.h"
 
 AWeapon::AWeapon()
@@ -173,7 +174,7 @@ void AWeapon::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeP
 	DOREPLIFETIME(AWeapon, Rep_ExtraMesh);
 }
 
-void AWeapon::FireGun()
+void AWeapon::FireGun(bool doDamage)
 {
 	APlayerController* PC = Cast<APlayerController>(GetOwner()->GetInstigatorController());
 
@@ -206,7 +207,19 @@ void AWeapon::FireGun()
 			AActor* HitActor = HitResult.GetActor();
 			UE_LOG(LogTemp, Warning, TEXT("Hit Actor: %s (Class: %s)"),
 				*HitActor->GetName(), *HitActor->GetClass()->GetName());
-			UGameplayStatics::ApplyDamage(HitActor, DamageAmount, nullptr, this, nullptr);
+
+			if (doDamage)
+			{
+				UGameplayStatics::ApplyDamage(HitActor, DamageAmount, nullptr, this, nullptr);
+			}
+			else
+			{
+				ASCP_Base* name = Cast<ASCP_Base>(HitActor);
+				if (name)
+				{
+					name->Contain(false);
+				}
+			}
 		}
 
 		FColor LineColor = bHit ? FColor::Red : FColor::Green;

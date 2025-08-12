@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "SCP_Base.h"
 #include "GameFramework/Character.h"
-#include "Perception/PawnSensingComponent.h"
 #include "SCP_939.generated.h"
 
 UCLASS()
@@ -20,14 +19,6 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category = "AI", meta = (AllowPrivateAccess = "true"))
-	UPawnSensingComponent* PawnSensingComponent;
-
-	UFUNCTION()
-	void OnSeePawn(APawn* OtherPawn);
-
-	UFUNCTION()
-	void OnHearNoise(APawn* InstigatorPawn, const FVector& Loctaion, float Volume);
 
 public:
 	UPROPERTY(VisibleAnywhere,BlueprintReadOnly, Category = "Mesh")
