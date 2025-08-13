@@ -14,6 +14,7 @@ ASCP_Base::ASCP_Base()
     bReplicates = true;
 
     GetCapsuleComponent()->InitCapsuleSize(42.f, 96.f);
+    GetCapsuleComponent()->SetCollisionProfileName(TEXT("BlockAll"));
     SetRootComponent(GetCapsuleComponent()); 
 
     SCPMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SCPMesh"));
@@ -33,7 +34,7 @@ ASCP_Base::ASCP_Base()
     PawnSensingComponent = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComponent"));
     PawnSensingComponent->SetPeripheralVisionAngle(90.0f);
     PawnSensingComponent->SightRadius = 1000.0f;
-    PawnSensingComponent->SensingInterval = 0.5f;
+    PawnSensingComponent->SensingInterval = 0.1f;
     //PawnSensingComponent->;
 
     //AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
