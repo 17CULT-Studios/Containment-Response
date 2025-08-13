@@ -101,8 +101,8 @@ public:
 	float SanityDrainAmount;
 
 	//---------- Looks/Info ----------
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
-	UCapsuleComponent* CollisionCapsule;
+	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
+	//UCapsuleComponent* CollisionCapsule;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
 	UStaticMeshComponent* SCPMesh;

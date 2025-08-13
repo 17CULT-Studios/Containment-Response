@@ -298,13 +298,13 @@ void AContainment_ResponseCharacter::Shoot()// if weapon exists shoot
 
 	if (tempWeapon != nullptr)
 	{
-		if (CurrentWeapon == 1)
+		if (CurrentWeapon == 3)
 		{
-			tempWeapon->FireGun(true);
+			tempWeapon->FireGun(false);
 		}
 		else
 		{
-			tempWeapon->FireGun(false);
+			tempWeapon->FireGun(true);
 		}
 	}
 }
@@ -314,7 +314,7 @@ void AContainment_ResponseCharacter::PrimaryWeapon()
 	CurrentWeapon = 1;
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Gun")));
+		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Primary")));
 	}
 }
 
@@ -323,7 +323,7 @@ void AContainment_ResponseCharacter::SecondaryWeapon()
 	CurrentWeapon = 2;
 	if (GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Contain")));
+		GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Secondary")));
 	}
 }
 
@@ -335,14 +335,21 @@ void AContainment_ResponseCharacter::Scroll()
 		CurrentWeapon = 2;
 		if (GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Contain")));
+			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Secondary")));
 		}
 		break;
 	case 2:
+		CurrentWeapon = 3;
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Contain")));
+		}
+		break;
+	case 3:
 		CurrentWeapon = 1;
 		if (GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Gun")));
+			GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Weapon = Primary")));
 		}
 		break;
 	default:

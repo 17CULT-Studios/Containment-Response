@@ -15,7 +15,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_UCapsuleComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UCharacterMovementComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
@@ -339,10 +338,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_SanityDrainAmount;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_CollisionCapsule_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_CollisionCapsule;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_SCPMesh_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_SCPMesh;
@@ -620,24 +615,16 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_SanityDrainAmount = { "SanityDrainAmount", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, SanityDrainAmount), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_SanityDrainAmount_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_SanityDrainAmount_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_CollisionCapsule_MetaData[] = {
-		{ "Category", "SCP" },
-#if !UE_BUILD_SHIPPING
-		{ "Comment", "//---------- Looks/Info ----------\n" },
-#endif
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-#if !UE_BUILD_SHIPPING
-		{ "ToolTip", "---------- Looks/Info ----------" },
-#endif
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_CollisionCapsule = { "CollisionCapsule", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, CollisionCapsule), Z_Construct_UClass_UCapsuleComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_CollisionCapsule_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_CollisionCapsule_MetaData) };
-#if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh_MetaData[] = {
 		{ "Category", "SCP" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "//---------- Looks/Info ----------\n//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = \"SCP\")\n//UCapsuleComponent* CollisionCapsule;\n" },
+#endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "SCP_Base.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "---------- Looks/Info ----------\nUPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = \"SCP\")\nUCapsuleComponent* CollisionCapsule;" },
+#endif
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh = { "SCPMesh", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, SCPMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh_MetaData) };
@@ -674,7 +661,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsContained,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanEscape,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_SanityDrainAmount,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_CollisionCapsule,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_CharMove,
 	};
@@ -716,9 +702,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ASCP_Base, ASCP_Base::StaticClass, TEXT("ASCP_Base"), &Z_Registration_Info_UClass_ASCP_Base, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_Base), 2708658135U) },
+		{ Z_Construct_UClass_ASCP_Base, ASCP_Base::StaticClass, TEXT("ASCP_Base"), &Z_Registration_Info_UClass_ASCP_Base, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_Base), 3124796400U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_1358140420(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_757473581(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

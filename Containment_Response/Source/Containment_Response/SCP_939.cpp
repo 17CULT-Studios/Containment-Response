@@ -10,8 +10,9 @@
 
 ASCP_939::ASCP_939()
 {
+
 	SkeletalMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("AI_SkeletalMesh"));
-	SkeletalMesh->SetupAttachment(GetMesh());
+	SkeletalMesh->SetupAttachment(RootComponent);
 
 	SkeletalMesh->SetRelativeLocation(FVector(0.f, 0.f, -90.f));
 	SkeletalMesh->SetRelativeRotation(FRotator(0.f, -90.f, 0.f));

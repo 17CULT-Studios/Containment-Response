@@ -17,7 +17,7 @@ ASCP_049::ASCP_049()
     PrimaryActorTick.bCanEverTick = true;
 
 
-    CollisionCapsule->SetCollisionResponseToChannel(ECC_Camera, ECR_Block);
+    GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Block);
     SCPMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
     
 
