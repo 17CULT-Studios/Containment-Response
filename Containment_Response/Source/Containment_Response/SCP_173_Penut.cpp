@@ -2,9 +2,6 @@
 
 
 #include "SCP_173_Penut.h"
-#include "Components/CapsuleComponent.h"
-#include "GameFramework/FloatingPawnMovement.h"
-#include "GameFramework/Character.h"
 #include "Kismet/GameplayStatics.h"
 #include "DrawDebugHelpers.h"
 #include "Net/UnrealNetwork.h"
@@ -14,7 +11,7 @@
 
 ASCP_173_Penut::ASCP_173_Penut()
 {
-    bReplicates = true;
+    //bReplicates = true;
     PrimaryActorTick.bCanEverTick = true;
 
     SCPID = TEXT("173");
@@ -28,11 +25,6 @@ ASCP_173_Penut::ASCP_173_Penut()
 void ASCP_173_Penut::BeginPlay()
 {
     Super::BeginPlay();
-    if (GetCharacterMovement()->MovementMode == MOVE_None)
-    {
-        GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Red, TEXT("Fixing movement mode..."));
-        GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-    }
 }
 
 void ASCP_173_Penut::Tick(float DeltaTime)

@@ -105,7 +105,7 @@ void ASCP_Base::OnSeePawn(APawn* OtherPawn)
 		AAIController* ai = Cast<AAIController>(GetController());
 		if (ai)
 		{
-			ai->MoveToLocation(player->GetActorLocation());
+			ai->MoveToActor(player);
 			GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Cyan, FString::Printf(TEXT("Movement Mode: %d"), (int32)GetCharacterMovement()->MovementMode));
 		}
 	}
