@@ -84,24 +84,6 @@
     <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_049.cpp">
-      <Filter>Source\Containment_Response</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_049.h">
-      <Filter>Source\Containment_Response</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_173_Penut.cpp">
-      <Filter>Source\Containment_Response</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_173_Penut.h">
-      <Filter>Source\Containment_Response</Filter>
-    </ClInclude>
-    <ClCompile Include="..\..\Source\Containment_Response\SCP_939.cpp">
-      <Filter>Source\Containment_Response</Filter>
-    </ClCompile>
-    <ClInclude Include="..\..\Source\Containment_Response\SCP_939.h">
-      <Filter>Source\Containment_Response</Filter>
-    </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\SCP_Base.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>

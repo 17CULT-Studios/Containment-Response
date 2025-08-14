@@ -35,10 +35,6 @@ ASCP_Base::ASCP_Base()
     PawnSensingComponent->SetPeripheralVisionAngle(90.0f);
     PawnSensingComponent->SightRadius = 1000.0f;
     PawnSensingComponent->SensingInterval = 0.1f;
-    //PawnSensingComponent->;
-
-    //AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
-    //AIControllerClass = AAIController::StaticClass();
 }
 
 void ASCP_Base::BeginPlay()
@@ -51,8 +47,11 @@ void ASCP_Base::BeginPlay()
         PawnSensingComponent->OnSeePawn.AddDynamic(this, &ASCP_Base::OnSeePawn);
         PawnSensingComponent->OnHearNoise.AddDynamic(this, &ASCP_Base::OnHearNoise);
     }
+}
 
-    Tags.Add("Enemy");
+void ASCP_Base::Tick(float DeltaTime)
+{
+   
 }
 
 void ASCP_Base::UseAbility()
@@ -89,23 +88,30 @@ void ASCP_Base::Heal(float value)
 
 
 
-void ASCP_Base::OnSeePawn(APawn* OtherPawn)
+void ASCP_Base::OnSeePawn_Implementation(APawn* OtherPawn)
 {
-    if (GEngine)
+    if (!bIsContained)
     {
-        GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Pawn sensed: %s"), *OtherPawn->GetName()));
-    }
-
-    AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
-    if (player && player->IsPlayerControlled())
-    {
-        AAIController* ai = Cast<AAIController>(GetController());
-        if (ai)
+        AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
+        if (player && player->IsPlayerControlled())
         {
-            GEngine->AddOnScreenDebugMessage(100, 5.0f, FColor::Red, FString::Printf(TEXT("X: %f"), player->GetActorLocation().X));
-            GEngine->AddOnScreenDebugMessage(101, 5.0f, FColor::Blue, FString::Printf(TEXT("Y: %f"), player->GetActorLocation().Y));
-            GEngine->AddOnScreenDebugMessage(102, 5.0f, FColor::Green, FString::Printf(TEXT("Z: %f"), player->GetActorLocation().Z));
-            ai->MoveToLocation(player->GetActorLocation());
+            AAIController* ai = Cast<AAIController>(GetController());
+            if (ai)
+            {
+                ai->MoveToLocation(player->GetActorLocation());
+            }
+        }
+    }
+    else
+    {
+        AContainment_ResponseCharacter* player = Cast<AContainment_ResponseCharacter>(OtherPawn);
+        if (player && player->IsPlayerControlled())
+        {
+            AAIController* ai = Cast<AAIController>(GetController());
+            if (ai)
+            {
+                ai->MoveToLocation(player->GetActorLocation(),250.0f);
+            }
         }
     }
 }
@@ -123,10 +129,7 @@ void ASCP_Base::OnHearNoise(APawn* InstigatorPawn, const FVector& Loctaion, floa
         AAIController* ai = Cast<AAIController>(GetController());
         if (ai)
         {
-            //if (bCanMove)
-            //{
             ai->MoveToLocation(player->GetActorLocation());
-            //}
         }
     }
 }
@@ -134,6 +137,7 @@ void ASCP_Base::OnHearNoise(APawn* InstigatorPawn, const FVector& Loctaion, floa
 void ASCP_Base::Contain(bool CanExcape)
 {
     bIsContained = true;
+    
     bCanEscape = CanExcape;
 
     if (GEngine)
@@ -141,4 +145,3 @@ void ASCP_Base::Contain(bool CanExcape)
         GEngine->AddOnScreenDebugMessage(1, 5.0f, FColor::Magenta, FString::Printf(TEXT("Cantained: %s")));
     }
 }
-

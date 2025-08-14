@@ -15,7 +15,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
 	ENGINE_API UClass* Z_Construct_UClass_APawn_NoRegister();
-	ENGINE_API UClass* Z_Construct_UClass_UCharacterMovementComponent_NoRegister();
 	ENGINE_API UClass* Z_Construct_UClass_UStaticMeshComponent_NoRegister();
 	UPackage* Z_Construct_UPackage__Script_Containment_Response();
 // End Cross Module References
@@ -34,7 +33,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		P_GET_OBJECT(APawn,Z_Param_OtherPawn);
 		P_FINISH;
 		P_NATIVE_BEGIN;
-		P_THIS->OnSeePawn(Z_Param_OtherPawn);
+		P_THIS->OnSeePawn_Implementation(Z_Param_OtherPawn);
 		P_NATIVE_END;
 	}
 	DEFINE_FUNCTION(ASCP_Base::execHeal)
@@ -52,6 +51,17 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		P_NATIVE_BEGIN;
 		P_THIS->Contain(Z_Param_CanExcape);
 		P_NATIVE_END;
+	}
+	struct SCP_Base_eventOnSeePawn_Parms
+	{
+		APawn* OtherPawn;
+	};
+	static FName NAME_ASCP_Base_OnSeePawn = FName(TEXT("OnSeePawn"));
+	void ASCP_Base::OnSeePawn(APawn* OtherPawn)
+	{
+		SCP_Base_eventOnSeePawn_Parms Parms;
+		Parms.OtherPawn=OtherPawn;
+		ProcessEvent(FindFunctionChecked(NAME_ASCP_Base_OnSeePawn),&Parms);
 	}
 	void ASCP_Base::StaticRegisterNativesASCP_Base()
 	{
@@ -190,10 +200,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 	}
 	struct Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics
 	{
-		struct SCP_Base_eventOnSeePawn_Parms
-		{
-			APawn* OtherPawn;
-		};
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_OtherPawn;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 #if WITH_METADATA
@@ -207,12 +213,13 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::Function_MetaDataParams[] = {
+		{ "Category", "AI" },
 		{ "ModuleRelativePath", "SCP_Base.h" },
 	};
 #endif
-	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASCP_Base, nullptr, "OnSeePawn", nullptr, nullptr, Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::PropPointers), sizeof(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::SCP_Base_eventOnSeePawn_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::Function_MetaDataParams) };
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_ASCP_Base, nullptr, "OnSeePawn", nullptr, nullptr, Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::PropPointers), sizeof(SCP_Base_eventOnSeePawn_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x08020C00, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::Function_MetaDataParams), Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::Function_MetaDataParams) };
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::PropPointers) < 2048);
-	static_assert(sizeof(Z_Construct_UFunction_ASCP_Base_OnSeePawn_Statics::SCP_Base_eventOnSeePawn_Parms) < MAX_uint16);
+	static_assert(sizeof(SCP_Base_eventOnSeePawn_Parms) < MAX_uint16);
 	UFunction* Z_Construct_UFunction_ASCP_Base_OnSeePawn()
 	{
 		static UFunction* ReturnFunction = nullptr;
@@ -260,49 +267,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		static void NewProp_bIsImmortal_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsImmortal;
 #if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_VisionRange_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_VisionRange;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_VisionAngle_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_VisionAngle;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_HearingRange_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_HearingRange;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Sensing_Interval_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_Sensing_Interval;
-#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_PawnSensingComponent_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_PawnSensingComponent;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_JumpVelocity_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_JumpVelocity;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_Air_Control_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_Air_Control;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_MaxWalkingSpeed_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxWalkingSpeed;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_MinWalkingSpeed_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_MinWalkingSpeed;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_DecelerationWalking_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_DecelerationWalking;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_DecelerationFalling_MetaData[];
-#endif
-		static const UECodeGen_Private::FFloatPropertyParams NewProp_DecelerationFalling;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bCanOpenDoors_MetaData[];
 #endif
@@ -324,6 +291,11 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		static void NewProp_bCanMove_SetBit(void* Obj);
 		static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanMove;
 #if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_bFollowPlayer_MetaData[];
+#endif
+		static void NewProp_bFollowPlayer_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bFollowPlayer;
+#if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_bIsContained_MetaData[];
 #endif
 		static void NewProp_bIsContained_SetBit(void* Obj);
@@ -341,10 +313,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_SCPMesh_MetaData[];
 #endif
 		static const UECodeGen_Private::FObjectPropertyParams NewProp_SCPMesh;
-#if WITH_METADATA
-		static const UECodeGen_Private::FMetaDataPairParam NewProp_CharMove_MetaData[];
-#endif
-		static const UECodeGen_Private::FObjectPropertyParams NewProp_CharMove;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -358,7 +326,7 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		{ &Z_Construct_UFunction_ASCP_Base_Contain, "Contain" }, // 3896819115
 		{ &Z_Construct_UFunction_ASCP_Base_Heal, "Heal" }, // 994174652
 		{ &Z_Construct_UFunction_ASCP_Base_OnHearNoise, "OnHearNoise" }, // 1765701052
-		{ &Z_Construct_UFunction_ASCP_Base_OnSeePawn, "OnSeePawn" }, // 1946922940
+		{ &Z_Construct_UFunction_ASCP_Base_OnSeePawn, "OnSeePawn" }, // 2802046497
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -439,50 +407,22 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsImmortal = { "bIsImmortal", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ASCP_Base), &Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsImmortal_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsImmortal_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsImmortal_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionRange_MetaData[] = {
-		{ "Category", "SCPMembers" },
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_PawnSensingComponent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "AI" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//---------- AWARENESS ----------\n" },
 #endif
+		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "SCP_Base.h" },
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "---------- AWARENESS ----------" },
 #endif
 	};
 #endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionRange = { "VisionRange", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, VisionRange), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionRange_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionRange_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionAngle_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionAngle = { "VisionAngle", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, VisionAngle), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionAngle_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionAngle_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_HearingRange_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_HearingRange = { "HearingRange", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, HearingRange), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_HearingRange_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_HearingRange_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_Sensing_Interval_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_Sensing_Interval = { "Sensing_Interval", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, Sensing_Interval), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_Sensing_Interval_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_Sensing_Interval_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_PawnSensingComponent_MetaData[] = {
-		{ "AllowPrivateAccess", "true" },
-		{ "Category", "AI" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_PawnSensingComponent = { "PawnSensingComponent", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, PawnSensingComponent), Z_Construct_UClass_UPawnSensingComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_PawnSensingComponent_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_PawnSensingComponent_MetaData) };
 #if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_JumpVelocity_MetaData[] = {
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanOpenDoors_MetaData[] = {
 		{ "Category", "SCPMembers" },
 #if !UE_BUILD_SHIPPING
 		{ "Comment", "//---------- Movement ----------\n" },
@@ -491,48 +431,6 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 #if !UE_BUILD_SHIPPING
 		{ "ToolTip", "---------- Movement ----------" },
 #endif
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_JumpVelocity = { "JumpVelocity", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, JumpVelocity), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_JumpVelocity_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_JumpVelocity_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_Air_Control_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_Air_Control = { "Air_Control", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, Air_Control), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_Air_Control_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_Air_Control_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_MaxWalkingSpeed_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_MaxWalkingSpeed = { "MaxWalkingSpeed", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, MaxWalkingSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_MaxWalkingSpeed_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_MaxWalkingSpeed_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_MinWalkingSpeed_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_MinWalkingSpeed = { "MinWalkingSpeed", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, MinWalkingSpeed), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_MinWalkingSpeed_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_MinWalkingSpeed_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationWalking_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationWalking = { "DecelerationWalking", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, DecelerationWalking), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationWalking_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationWalking_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationFalling_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationFalling = { "DecelerationFalling", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, DecelerationFalling), METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationFalling_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationFalling_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanOpenDoors_MetaData[] = {
-		{ "Category", "SCPMembers" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
 	};
 #endif
 	void Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanOpenDoors_SetBit(void* Obj)
@@ -573,6 +471,17 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		((ASCP_Base*)Obj)->bCanMove = 1;
 	}
 	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanMove = { "bCanMove", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ASCP_Base), &Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanMove_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanMove_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanMove_MetaData) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer_MetaData[] = {
+		{ "Category", "SCPMembers" },
+		{ "ModuleRelativePath", "SCP_Base.h" },
+	};
+#endif
+	void Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer_SetBit(void* Obj)
+	{
+		((ASCP_Base*)Obj)->bFollowPlayer = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer = { "bFollowPlayer", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(ASCP_Base), &Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer_MetaData) };
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsContained_MetaData[] = {
 		{ "Category", "SCPMembers" },
@@ -618,24 +527,16 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh_MetaData[] = {
 		{ "Category", "SCP" },
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "//---------- Looks/Info ----------\n//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = \"SCP\")\n//UCapsuleComponent* CollisionCapsule;\n" },
+		{ "Comment", "//---------- Looks/Info ----------\n" },
 #endif
 		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "SCP_Base.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "---------- Looks/Info ----------\nUPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = \"SCP\")\nUCapsuleComponent* CollisionCapsule;" },
+		{ "ToolTip", "---------- Looks/Info ----------" },
 #endif
 	};
 #endif
 	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh = { "SCPMesh", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, SCPMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh_MetaData) };
-#if WITH_METADATA
-	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ASCP_Base_Statics::NewProp_CharMove_MetaData[] = {
-		{ "Category", "SCP" },
-		{ "EditInline", "true" },
-		{ "ModuleRelativePath", "SCP_Base.h" },
-	};
-#endif
-	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ASCP_Base_Statics::NewProp_CharMove = { "CharMove", nullptr, (EPropertyFlags)0x00100000000a001d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ASCP_Base, CharMove), Z_Construct_UClass_UCharacterMovementComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ASCP_Base_Statics::NewProp_CharMove_MetaData), Z_Construct_UClass_ASCP_Base_Statics::NewProp_CharMove_MetaData) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ASCP_Base_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPID,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPName,
@@ -643,26 +544,16 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_MaxHealth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_CurrentHealth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsImmortal,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionRange,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_VisionAngle,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_HearingRange,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_Sensing_Interval,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_PawnSensingComponent,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_JumpVelocity,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_Air_Control,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_MaxWalkingSpeed,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_MinWalkingSpeed,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationWalking,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_DecelerationFalling,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanOpenDoors,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanTeleport,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanPhaseThroughWalls,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanMove,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bFollowPlayer,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bIsContained,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_bCanEscape,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_SanityDrainAmount,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_SCPMesh,
-		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ASCP_Base_Statics::NewProp_CharMove,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ASCP_Base_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ASCP_Base>::IsAbstract,
@@ -702,9 +593,9 @@ void EmptyLinkFunctionForGeneratedCodeSCP_Base() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ASCP_Base, ASCP_Base::StaticClass, TEXT("ASCP_Base"), &Z_Registration_Info_UClass_ASCP_Base, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_Base), 3124796400U) },
+		{ Z_Construct_UClass_ASCP_Base, ASCP_Base::StaticClass, TEXT("ASCP_Base"), &Z_Registration_Info_UClass_ASCP_Base, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ASCP_Base), 817975962U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_757473581(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_4182345120(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_SCP_Base_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

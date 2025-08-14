@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -21,7 +19,7 @@ public:
 	ASCP_Base();
 protected:
 	virtual void BeginPlay() override;
-
+	virtual void Tick(float DeltaTime) override;
 public:	
 	//---------- FUNCTIONS ----------
 	virtual void UseAbility();
@@ -50,37 +48,16 @@ public:
 	bool bIsImmortal;
 
 	//---------- AWARENESS ----------
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float VisionRange=400;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float VisionAngle=90.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float HearingRange=5;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float Sensing_Interval=0.5;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AI", meta = (AllowPrivateAccess = "true"))
 	UPawnSensingComponent* PawnSensingComponent;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintNativeEvent, Category = "AI")
 	void OnSeePawn(APawn* OtherPawn);
 
 	UFUNCTION()
 	void OnHearNoise(APawn* InstigatorPawn, const FVector& Loctaion, float Volume);
 
 	//---------- Movement ----------
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float JumpVelocity = 700.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float Air_Control = 0.35f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float MaxWalkingSpeed = 400.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float MinWalkingSpeed = 40.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float DecelerationWalking = 2000.0f;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
-	float DecelerationFalling = 1500.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
 	bool bCanOpenDoors;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
@@ -89,6 +66,8 @@ public:
 	bool bCanPhaseThroughWalls;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
 	bool bCanMove = true;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
+	bool bFollowPlayer = false;
 
 	//---------- Containment ----------
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SCPMembers")
@@ -101,12 +80,6 @@ public:
 	float SanityDrainAmount;
 
 	//---------- Looks/Info ----------
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
-	//UCapsuleComponent* CollisionCapsule;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
 	UStaticMeshComponent* SCPMesh;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "SCP")
-	UCharacterMovementComponent* CharMove = GetCharacterMovement();
 };
