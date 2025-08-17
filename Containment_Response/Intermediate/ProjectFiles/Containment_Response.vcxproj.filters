@@ -84,6 +84,12 @@
     <ClInclude Include="..\..\Source\Containment_Response\CRT_Unit.h">
       <Filter>Source\Containment_Response</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Containment_Response\LevelGenerator.cpp">
+      <Filter>Source\Containment_Response</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Containment_Response\LevelGenerator.h">
+      <Filter>Source\Containment_Response</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Containment_Response\SCP_Base.cpp">
       <Filter>Source\Containment_Response</Filter>
     </ClCompile>

@@ -1,0 +1,85 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/Actor.h"
+#include "LevelGenerator.generated.h"
+
+USTRUCT(BlueprintType)
+struct FRoomTile
+{
+    GENERATED_BODY()
+
+public:
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
+    UStaticMesh* RoomMesh = nullptr;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
+    bool bNorthDoor = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
+    bool bSouthDoor = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
+    bool bEastDoor = false;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Room")
+    bool bWestDoor = false;
+
+    bool HasAnyDoor() const
+    {
+        return bNorthDoor || bSouthDoor || bEastDoor || bWestDoor;
+    }
+};
+
+UCLASS()
+class CONTAINMENT_RESPONSE_API ALevelGenerator : public AActor
+{
+	GENERATED_BODY()
+	
+public:	
+	ALevelGenerator();
+
+protected:
+	virtual void BeginPlay() override;
+
+public:	
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    int32 LevelWidth = 10;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    int32 LevelHeight = 10;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    int32 NumGenerations = 25;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    float TileSize = 1200.f;
+	
+    // RNG Seed
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    int32 Seed = 12345;
+
+    // Mesh pool to pick random rooms from
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    TArray<UStaticMesh*> RoomMeshes;
+
+    // Our grid
+    UPROPERTY()
+    TArray<FRoomTile> Grid;
+
+private:
+    FRandomStream RandomStream;
+
+public:
+    void InitializeGrid();
+    FRoomTile* GetTile(int32 X, int32 Y);
+    void SetTile(int32 X, int32 Y, const FRoomTile& Tile);
+
+    void GenerateDungeon();
+    void SpawnDungeon();
+
+    // Helper for random room creation
+    FRoomTile MakeRandomRoom(bool ForceNorth = false, bool ForceSouth = false, bool ForceEast = false, bool ForceWest = false);
+};
