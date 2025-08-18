@@ -5,25 +5,22 @@
 #include "Engine/World.h"
 #include "Engine/StaticMeshActor.h"
 
-// Sets default values
 ALevelGenerator::ALevelGenerator()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
 }
 
-// Called when the game starts or when spawned
 void ALevelGenerator::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CleanUp.Empty();
 
 	RandomStream.Initialize(Seed);
 
 	InitializeGrid();
 	GenerateDungeon();
 	SpawnDungeon();
-	
 }
 
 void ALevelGenerator::InitializeGrid()
@@ -54,59 +51,62 @@ void ALevelGenerator::GenerateDungeon()
 {
 	int32 StartX = LevelWidth / 2;
 	int32 StartY = LevelHeight / 2;
+	int32 Third = NumGenerations / 3;
 
-	FRoomTile StartRoom = MakeRandomRoom();
-	SetTile(StartX, StartY, StartRoom);
+	// Place the starting room
+	SetTile(StartX, StartY, StartTile);
+
+	// Frontier: tiles to expand from this step
+	TArray<FIntPoint> Frontier;
+	Frontier.Add(FIntPoint(StartX, StartY));
 
 	for (int32 Step = 0; Step < NumGenerations; Step++)
 	{
-		for (int32 Y = 0; Y < LevelHeight; Y++)
+		TArray<FIntPoint> NextFrontier;
+
+		if (Step < Third)
 		{
-			for (int32 X = 0; X < LevelWidth; X++)
-			{
-				FRoomTile* Tile = GetTile(X, Y);
-				if (!Tile || !Tile->HasAnyDoor())
-				{
-					continue;
-				}
-
-				if (Tile->bNorthDoor)
-				{
-					FRoomTile* Neighbor = GetTile(X, Y + 1);
-					if (Neighbor && !Neighbor->HasAnyDoor())
-					{
-						SetTile(X, Y + 1, MakeRandomRoom(true, false, false, false));
-					}
-				}
-
-				if (Tile->bSouthDoor)
-				{
-					FRoomTile* Neighbor = GetTile(X, Y - 1);
-					if (Neighbor && !Neighbor->HasAnyDoor())
-					{
-						SetTile(X, Y + 1, MakeRandomRoom(false, true, false, false));
-					}
-				}
-
-				if (Tile->bEastDoor)
-				{
-					FRoomTile* Neighbor = GetTile(X + 1, Y);
-					if (Neighbor && !Neighbor->HasAnyDoor())
-					{
-						SetTile(X, Y + 1, MakeRandomRoom(false, false, true, false));
-					}
-				}
-
-				if (Tile->bWestDoor)
-				{
-					FRoomTile* Neighbor = GetTile(X - 1, Y);
-					if (Neighbor && !Neighbor->HasAnyDoor())
-					{
-						SetTile(X, Y + 1, MakeRandomRoom(false, false, false, true));
-					}
-				}
-			}
+			Bias = ERoomBias::TStraight;
 		}
+		else if (Step < 2 * Third)
+		{
+			Bias = ERoomBias::All;
+		}
+		else
+		{
+			Bias = ERoomBias::Corners;
+		}
+
+
+		for (const FIntPoint& Coord : Frontier)
+		{
+			int32 X = Coord.X;
+			int32 Y = Coord.Y;
+
+			FRoomTile* Tile = GetTile(X, Y);
+			if (!Tile) continue;
+
+			// Local helper for neighbor placement
+			auto TryPlace = [&](int32 NX, int32 NY, bool ForceNorth, bool ForceSouth, bool ForceEast, bool ForceWest)
+				{
+					FRoomTile* Neighbor = GetTile(NX, NY);
+					if (!Neighbor || Neighbor->HasAnyDoor()) return; // already filled
+
+					// Create a new room that matches forced doors
+					FRoomTile NewTile = MakeRandomRoom(ForceNorth, ForceSouth, ForceEast, ForceWest);
+					SetTile(NX, NY, NewTile);
+					NextFrontier.Add(FIntPoint(NX, NY));
+				};
+
+			// Expand in each direction if this tile has a door
+			if (Tile->bNorthDoor) TryPlace(X, Y + 1, false, true, false, false);
+			if (Tile->bSouthDoor) TryPlace(X, Y - 1, true, false, false, false);
+			if (Tile->bEastDoor)  TryPlace(X + 1, Y, false, false, false, true);
+			if (Tile->bWestDoor)  TryPlace(X - 1, Y, false, false, true, false);
+		}
+
+		// Move to the next generation frontier
+		Frontier = NextFrontier;
 	}
 }
 
@@ -119,28 +119,153 @@ void ALevelGenerator::SpawnDungeon()
 			const FRoomTile* Tile = GetTile(X, Y);
 			if (Tile && Tile->RoomMesh)
 			{
-				FVector Location = FVector(X * TileSize, Y * TileSize, 0);
+				FVector Location = FVector(X * TileSize, Y * TileSize, 300);
 				FTransform SpawnTransform(Location);
-				GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), SpawnTransform);
+				AStaticMeshActor* RoomActor = GetWorld()->SpawnActor<AStaticMeshActor>(AStaticMeshActor::StaticClass(), SpawnTransform);
+
+				if (RoomActor)
+				{
+					RoomActor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
+					RoomActor->GetStaticMeshComponent()->SetStaticMesh(Tile->RoomMesh);
+					RoomActor->SetActorScale3D(FVector(1.0f));
+
+					CleanUp.Add(RoomActor);
+				}
 			}
 		}
 	}
 }
 
-FRoomTile ALevelGenerator::MakeRandomRoom(bool ForceNorth, bool ForceSouth, bool ForceEast, bool ForceWest)
+void ALevelGenerator::GenerateLevel()
 {
-	FRoomTile NewRoom;
+	LevelCleanUp();
+	CleanUp.Empty();
 
-	if (RoomMeshes.Num() > 0)
-	{
-		NewRoom.RoomMesh = RoomMeshes[RandomStream.RandRange(0, RoomMeshes.Num() - 1)];
-	}
+	RandomStream.Initialize(Seed);
 
-	NewRoom.bNorthDoor = ForceNorth || (RandomStream.FRand() < 0.4f); // 40% chance
-	NewRoom.bSouthDoor = ForceSouth || (RandomStream.FRand() < 0.4f);
-	NewRoom.bEastDoor = ForceEast || (RandomStream.FRand() < 0.4f);
-	NewRoom.bWestDoor = ForceWest || (RandomStream.FRand() < 0.4f);
-
-	return NewRoom;
+	InitializeGrid();
+	GenerateDungeon();
+	SpawnDungeon();
 }
 
+void ALevelGenerator::LevelCleanUp()
+{
+	for (int32 i = CleanUp.Num() - 1; i >= 0; --i)
+	{
+		AStaticMeshActor* ActorToDestroy = CleanUp[i];
+		ActorToDestroy->Destroy();
+		CleanUp.RemoveAt(i);
+	}
+}
+
+FRoomTile ALevelGenerator::MakeRandomRoom(bool North, bool South, bool East, bool West)
+{
+	TArray<FRoomTile> Candidates;
+	FRoomTile Backup;
+	for (const FRoomTile& Def : StructureTiles)
+	{
+		int numOfDoor = 0;
+		if (Def.bNorthDoor) numOfDoor++;
+		if (Def.bSouthDoor) numOfDoor++;
+		if (Def.bEastDoor) numOfDoor++;
+		if (Def.bWestDoor) numOfDoor++;
+
+
+		switch (Bias)
+		{
+		case ERoomBias::TStraight:
+		{
+			if (numOfDoor == 2 || numOfDoor == 3)
+			{
+				if (North && Def.bNorthDoor == North)
+				{
+					Candidates.Add(Def);
+				}
+				if (South && Def.bSouthDoor == South)
+				{
+					Candidates.Add(Def);
+				}
+				if (East && Def.bEastDoor == East)
+				{
+					Candidates.Add(Def);
+				}
+				if (West && Def.bWestDoor == West)
+				{
+					Candidates.Add(Def);
+				}
+			}
+			break;
+		}
+		case ERoomBias::Corners:
+		{
+			if (numOfDoor == 2)
+			{
+				if (North && Def.bNorthDoor == North)
+				{
+					Candidates.Add(Def);
+				}
+				if (South && Def.bSouthDoor == South)
+				{
+					Candidates.Add(Def);
+				}
+				if (East && Def.bEastDoor == East)
+				{
+					Candidates.Add(Def);
+				}
+				if (West && Def.bWestDoor == West)
+				{
+					Candidates.Add(Def);
+				}
+			}
+			break;
+		}
+		default:
+		{
+			if (North && Def.bNorthDoor == North)
+			{
+				Candidates.Add(Def);
+			}
+			if (South && Def.bSouthDoor == South)
+			{
+				Candidates.Add(Def);
+			}
+			if (East && Def.bEastDoor == East)
+			{
+				Candidates.Add(Def);
+			}
+			if (West && Def.bWestDoor == West)
+			{
+				Candidates.Add(Def);
+			}
+		}
+		}
+		//if (North && Def.bNorthDoor == North)
+		//{
+		//	Candidates.Add(Def);
+		//}
+		//if (South && Def.bSouthDoor == South)
+		//{
+		//	Candidates.Add(Def);
+		//}
+		//if (East && Def.bEastDoor == East)
+		//{
+		//	Candidates.Add(Def);
+		//}
+		//if (West && Def.bWestDoor == West)
+		//{
+		//	Candidates.Add(Def);
+		//}
+		if (Def.bEastDoor && Def.bNorthDoor && Def.bSouthDoor && Def.bWestDoor)
+		{
+			Backup = Def;
+		}
+	}
+
+	if (Candidates.Num() > 0)
+	{
+		FRoomTile Chosen = Candidates[RandomStream.RandRange(0, Candidates.Num() - 1)];
+		return Chosen;
+	}
+
+	return Backup;
+}

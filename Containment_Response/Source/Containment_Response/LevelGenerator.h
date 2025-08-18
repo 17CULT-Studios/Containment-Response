@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Engine/StaticMeshActor.h"
 #include "LevelGenerator.generated.h"
 
 USTRUCT(BlueprintType)
@@ -33,7 +34,15 @@ public:
     }
 };
 
-UCLASS()
+UENUM(BlueprintType)
+enum class ERoomBias
+{
+    All,
+    TStraight,
+    Corners
+};
+
+UCLASS(Blueprintable)
 class CONTAINMENT_RESPONSE_API ALevelGenerator : public AActor
 {
 	GENERATED_BODY()
@@ -63,23 +72,34 @@ public:
 
     // Mesh pool to pick random rooms from
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
-    TArray<UStaticMesh*> RoomMeshes;
+    FRoomTile StartTile;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    TArray<FRoomTile> StructureTiles;
 
     // Our grid
     UPROPERTY()
     TArray<FRoomTile> Grid;
-
 private:
     FRandomStream RandomStream;
+
+    ERoomBias Bias = ERoomBias::All;
 
 public:
     void InitializeGrid();
     FRoomTile* GetTile(int32 X, int32 Y);
     void SetTile(int32 X, int32 Y, const FRoomTile& Tile);
-
     void GenerateDungeon();
     void SpawnDungeon();
 
+    UFUNCTION(BlueprintCallable, Category = "MyFunctions")
+    void GenerateLevel();
+
+    UFUNCTION(BlueprintCallable, Category = "MyFunctions")
+    void LevelCleanUp();
+
+    TArray<AStaticMeshActor*> CleanUp;
+
     // Helper for random room creation
-    FRoomTile MakeRandomRoom(bool ForceNorth = false, bool ForceSouth = false, bool ForceEast = false, bool ForceWest = false);
+    FRoomTile MakeRandomRoom(bool North = false, bool South = false, bool East = false, bool West = false);
 };
