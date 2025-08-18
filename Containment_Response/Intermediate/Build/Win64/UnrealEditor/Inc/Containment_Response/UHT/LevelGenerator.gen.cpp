@@ -313,16 +313,30 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FRoomTile>()
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_StartTile_MetaData[];
 #endif
 		static const UECodeGen_Private::FStructPropertyParams NewProp_StartTile;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_StartGroundTileMesh_MetaData[];
+#endif
+		static const UECodeGen_Private::FObjectPropertyParams NewProp_StartGroundTileMesh;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_StructureTiles_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_StructureTiles_MetaData[];
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_StructureTiles;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_GroundTiles_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_GroundTiles_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_GroundTiles;
 		static const UECodeGen_Private::FStructPropertyParams NewProp_Grid_Inner;
 #if WITH_METADATA
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_Grid_MetaData[];
 #endif
 		static const UECodeGen_Private::FArrayPropertyParams NewProp_Grid;
+		static const UECodeGen_Private::FStructPropertyParams NewProp_GroundGrid_Inner;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_GroundGrid_MetaData[];
+#endif
+		static const UECodeGen_Private::FArrayPropertyParams NewProp_GroundGrid;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -399,6 +413,13 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FRoomTile>()
 	};
 #endif
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartTile = { "StartTile", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALevelGenerator, StartTile), Z_Construct_UScriptStruct_FRoomTile, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartTile_MetaData), Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartTile_MetaData) }; // 2049231875
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartGroundTileMesh_MetaData[] = {
+		{ "Category", "Dungeon" },
+		{ "ModuleRelativePath", "LevelGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartGroundTileMesh = { "StartGroundTileMesh", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALevelGenerator, StartGroundTileMesh), Z_Construct_UClass_UStaticMesh_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartGroundTileMesh_MetaData), Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartGroundTileMesh_MetaData) };
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles_Inner = { "StructureTiles", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FRoomTile, METADATA_PARAMS(0, nullptr) }; // 2049231875
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles_MetaData[] = {
@@ -407,6 +428,14 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FRoomTile>()
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles = { "StructureTiles", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALevelGenerator, StructureTiles), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles_MetaData), Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles_MetaData) }; // 2049231875
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles_Inner = { "GroundTiles", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FRoomTile, METADATA_PARAMS(0, nullptr) }; // 2049231875
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles_MetaData[] = {
+		{ "Category", "Dungeon" },
+		{ "ModuleRelativePath", "LevelGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles = { "GroundTiles", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALevelGenerator, GroundTiles), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles_MetaData), Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles_MetaData) }; // 2049231875
 	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid_Inner = { "Grid", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FRoomTile, METADATA_PARAMS(0, nullptr) }; // 2049231875
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid_MetaData[] = {
@@ -420,6 +449,13 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FRoomTile>()
 	};
 #endif
 	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid = { "Grid", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALevelGenerator, Grid), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid_MetaData), Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid_MetaData) }; // 2049231875
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid_Inner = { "GroundGrid", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UScriptStruct_FRoomTile, METADATA_PARAMS(0, nullptr) }; // 2049231875
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid_MetaData[] = {
+		{ "ModuleRelativePath", "LevelGenerator.h" },
+	};
+#endif
+	const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid = { "GroundGrid", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(ALevelGenerator, GroundGrid), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid_MetaData), Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid_MetaData) }; // 2049231875
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_ALevelGenerator_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_LevelWidth,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_LevelHeight,
@@ -427,10 +463,15 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FRoomTile>()
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_TileSize,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Seed,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartTile,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StartGroundTileMesh,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_StructureTiles,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundTiles,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid_Inner,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_Grid,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid_Inner,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_ALevelGenerator_Statics::NewProp_GroundGrid,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_ALevelGenerator_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<ALevelGenerator>::IsAbstract,
@@ -478,9 +519,9 @@ template<> CONTAINMENT_RESPONSE_API UScriptStruct* StaticStruct<FRoomTile>()
 		{ FRoomTile::StaticStruct, Z_Construct_UScriptStruct_FRoomTile_Statics::NewStructOps, TEXT("RoomTile"), &Z_Registration_Info_UScriptStruct_RoomTile, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FRoomTile), 2049231875U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_ALevelGenerator, ALevelGenerator::StaticClass, TEXT("ALevelGenerator"), &Z_Registration_Info_UClass_ALevelGenerator, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ALevelGenerator), 3989581260U) },
+		{ Z_Construct_UClass_ALevelGenerator, ALevelGenerator::StaticClass, TEXT("ALevelGenerator"), &Z_Registration_Info_UClass_ALevelGenerator, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(ALevelGenerator), 1640501213U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_1186908449(TEXT("/Script/Containment_Response"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_122491074(TEXT("/Script/Containment_Response"),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::ClassInfo),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::ScriptStructInfo),
 		Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_smit2129_Desktop_Containment_Response_Containment_Response_Source_Containment_Response_LevelGenerator_h_Statics::EnumInfo));

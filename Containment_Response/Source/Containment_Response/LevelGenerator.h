@@ -75,11 +75,20 @@ public:
     FRoomTile StartTile;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    UStaticMesh* StartGroundTileMesh;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
     TArray<FRoomTile> StructureTiles;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Dungeon")
+    TArray<FRoomTile> GroundTiles;
 
     // Our grid
     UPROPERTY()
     TArray<FRoomTile> Grid;
+
+    UPROPERTY()
+    TArray<FRoomTile> GroundGrid;
 private:
     FRandomStream RandomStream;
 
@@ -102,4 +111,10 @@ public:
 
     // Helper for random room creation
     FRoomTile MakeRandomRoom(bool North = false, bool South = false, bool East = false, bool West = false);
+
+    void InitializeGroundGrid();
+    FRoomTile* GetGroundTile(int32 X, int32 Y);
+    void SetGroundTile(int32 X, int32 Y, const FRoomTile& Tile);
+    void GenerateGround();
+    void SpawnGround();
 };
